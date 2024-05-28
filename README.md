@@ -1,3 +1,3 @@
 # README
 ### ER図
-![image](https://github.com/wahei628/ShareSuke/assets/139987339/f65daa03-1db1-4681-b99d-92be8e26c407)
+![image](https://github.com/wahei628/ShareSuke/assets/139987339/26ca7edc-9802-49b9-9d69-3eb59bc3e025)
