@@ -33,7 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_083120) do
 
   create_table "schedules", force: :cascade do |t|
     t.bigint "event_id", null: false
-    t.date "date"
+    t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_schedules_on_event_id"
@@ -52,7 +52,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_083120) do
 
   create_table "users", force: :cascade do |t|
     t.bigint "events_id", null: false
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["events_id"], name: "index_users_on_events_id"
