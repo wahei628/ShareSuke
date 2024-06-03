@@ -92,6 +92,8 @@ GEM
       reline (>= 0.3.8)
     drb (2.2.1)
     erubi (1.12.0)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.5)
@@ -217,6 +219,7 @@ DEPENDENCIES
   bootsnap
   cssbundling-rails
   debug
+  friendly_id (~> 5.5.0)
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
