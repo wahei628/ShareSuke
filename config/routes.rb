@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'event/new'
   root 'top#index'
-  resources :events, only: [:index, :new, :create]
+  resources :events, only: %i[index new create show], param: :url_slug
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

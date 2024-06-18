@@ -27,11 +27,11 @@
       <br/>
       <br/>
       <div>
-        <%= f.fields_for :schedule do |date_form| %>
+        <%= f.fields_for :schedules do |date_form| %>
         <div>
-          <%= date_form.label :date, "日付" %>
+          <%= date_form.label :calendar_date, "日付" %>
           <div class="input input-bordered w-full max-w-xs">
-            <%= date_form.text_field :date %>
+            <%= date_form.text_field :calendar_date %>
           </div>
         </div>
         <% end %>
