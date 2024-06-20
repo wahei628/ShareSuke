@@ -1,0 +1,30 @@
+<h1><%= @event.title %></h1>
+
+<h2>Schedules</h2>
+<table style="border: 1px solid white; border-collapse: collapse; width: 80%; height: 70%;">
+  <tr>
+    <th style="border: 1px solid white;">日付</th>
+    <% @users.each do |user| %>
+      <th style="border: 1px solid white;"><%= user.name %></th>
+    <% end %>
+  </tr>
+  <% @event.schedules.each do |schedule| %>
+    <tr>
+      <td style="border: 1px solid white;"><%= schedule.date %></td>
+      <% @event.users.each do |user| %>
+        <td style="border: 1px solid white;"></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<h2>新規登録</h2>
+<%= form_with(model: User.new, url: event_users_path(@event), local: true) do |form| %>
+  <div class="field">
+    <%= form.label :name, "名前" %>
+    <%= form.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= form.submit "新規追加する" %>
+  </div>
+<% end %>
