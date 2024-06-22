@@ -8,7 +8,7 @@
 <div class="h-screen flex justify-center items-center m-[30px] p-[40px] ">
   <div class="card-body shadow-2xl">
     <h1 class="card-title">イベント新規作成</h1>
-    <%= form_with model: @event, local: true do |f| %>
+    <%= form_with model: @event, url:events_path, local: true do |f| %>
       <div>
         <%= f.label :title, "タイトル" %>
         <div class="input input-bordered w-full max-w-xs">
@@ -27,14 +27,12 @@
       <br/>
       <br/>
       <div>
-        <%= f.fields_for :schedules do |date_form| %>
-        <div>
-          <%= date_form.label :calendar_date, "日付" %>
-          <div class="input input-bordered w-full max-w-xs">
-            <%= date_form.text_field :calendar_date %>
-          </div>
+      <div>
+        <%= f.label :dates, "日付" %>
+        <div class="input input-bordered w-full max-w-xs">
+          <%= f.text_field :dates %>
         </div>
-        <% end %>
+      </div>        
       </div>
       <br/>
       <br/>

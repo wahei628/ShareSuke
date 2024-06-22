@@ -1,9 +1,9 @@
 
 <%= @event.title %>
 <br/>
-<%= @event.url_slug %>
-<br/>
 <%= @event.description %>
+<br/>
+<%= @event.url_slug %>
 <br/>
 <% @event.schedules.each do |schedule| %>
   <%= schedule.calendar_date %>
@@ -12,3 +12,5 @@
 <p class="text-blue-600"><%=link_to "本当はないけど一覧ページに戻る", events_path %></p>
 <%# ↑これは消す %>
 <br/>
+
+<%= debug params %>

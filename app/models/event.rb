@@ -4,7 +4,6 @@ class Event < ApplicationRecord
   
   # Event ++--③--+∈ Schedule
   has_many :schedules, dependent: :destroy
-  accepts_nested_attributes_for :schedules, allow_destroy: true, reject_if: :all_blank
 
   validates :title, presence: true
   validates :url_slug, presence: true
@@ -24,7 +23,6 @@ class Event < ApplicationRecord
     while Event.exists?(url_slug: temp_slug)
       temp_slug = SecureRandom.hex(15)
     end
-
     # Event.url_slug に temp_slug を格納
     self.url_slug = temp_slug if url_slug.blank?
   end
