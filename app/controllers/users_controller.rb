@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def create
     @event = Event.find(params[:event_id])
-    @user = User.new(user_params.merge(event_id: @event.id))
+    @user = @event.users.build(user_params)
     if @user.save
       redirect_to event_user_path(@event, @user), notice: "User was successfully created."
     else

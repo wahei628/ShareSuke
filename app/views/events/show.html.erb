@@ -1,7 +1,7 @@
 <h1><%= @event.title %></h1>
 <%= render 'events/schedule_table' %>
 <h2>新規登録</h2>
-<%= form_with(model: User.new, url: event_users_path(@event), local: true) do |form| %>
+<%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
   <div>
     <%= form.label :name, "名前" %>
     <%= form.text_field :name %>
