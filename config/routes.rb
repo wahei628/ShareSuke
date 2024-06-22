@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'event/new'
   root 'top#index'
   resources :events, only: %i[index new create show], param: :url_slug
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
