@@ -1,0 +1,27 @@
+<h2>Schedules</h2>
+<table style="border: 1px solid white; border-collapse: collapse; width: 80%; height: 70%;">
+  <thead>
+    <tr>
+      <th style="border: 1px solid white;"></th>
+      <th>ユーザー名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th style="border: 1px solid white;">日付</th>
+        <% @users.each do |user| %>
+          <th style="border: 1px solid white;">
+            <%= link_to user.name, edit_event_user_path(@event, user) %>
+          </th>
+        <% end %>
+      </tr>
+    <% @event.schedules.each do |schedule| %>
+      <tr>
+        <td style="border: 1px solid white;"><%= schedule.date %></td>
+        <% @event.users.each do |user| %>
+          <td style="border: 1px solid white;"></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
