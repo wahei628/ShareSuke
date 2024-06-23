@@ -8,4 +8,5 @@ class User < ApplicationRecord
   # User ++--④--+∈ UserSchedule ∋+--⑤--++ Schedule
   has_many :user_schedules, dependent: :destroy
   has_many :schedules, through: :user_schedules
+  validates :name, presence: true, length: { maximum: 15 }
 end
