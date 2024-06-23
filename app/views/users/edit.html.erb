@@ -1,0 +1,18 @@
+<h1><%= @event.title %></h1>
+<%= render 'events/schedule_table', event: @event, users: @users %>
+
+<%= form_with(model: [@event, @user], local: true) do |form| %>
+  <div>
+    <%= form.label :name, "名前" %>
+    <%= form.text_field :name %>
+  </div>
+  <div>
+    <%= form.submit "更新する" %>
+  </div>
+<% end %>
+
+<%= form_with(url: event_user_path(@event, @user), method: :delete, local: true) do |form| %>
+  <div>
+    <%= form.submit "削除する" %>
+  </div>
+<% end %>
