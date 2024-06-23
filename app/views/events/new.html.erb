@@ -4,27 +4,64 @@
   <title>New Event</title>
 </head>
 <body>
-  <h1>New Event</h1>
-  <%= form_with model: @event, local: true do |form| %>
-    <div>
-      <%= form.label :title %>
-      <%= form.text_field :title %>
+
+<div class="h-screen flex justify-center items-center m-[30px] p-[40px] ">
+  <div class="card-body shadow-2xl">
+    <h1 class="card-title">イベント新規作成</h1>
+    <%= form_with model: @event, url:events_path, local: true do |f| %>
+      <div>
+        <%= f.label :title, "タイトル" %>
+        <div class="input input-bordered w-full max-w-xs">
+          <%= f.text_field :title %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <div>
+        <%= f.label :description, "内容" %>
+        <div class="input input-bordered w-full max-w-xs">
+          <%= f.text_field :description %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div>
+      <div>
+        <%= f.label :dates, "日付" %>
+        <div class="input input-bordered w-full max-w-xs">
+          <%= f.text_field :dates %>
+        </div>
+      </div>
+      </div>
+      <br/>
+      <br/>
+      <div>
+        <%= f.label :password, "合言葉" %>
+        <div class="input input-bordered w-full max-w-xs">
+        <%= f.password_field :password %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <br/>
+      <div class="btn btn-primary">
+        <%= f.submit "Create Event" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%# <div class="card w-96 bg-base-100 shadow-xl">
+  <div class="card-body">
+    <h1 class="card-title">イベント作成ページに戻る</h1>
     </div>
-    <div>
-      <%= form.label :description %>
-      <%= form.text_area :description %>
-    </div>
-    <div>
-      <%= form.label :url_slug %>
-      <%= form.text_field :url_slug %>
-    </div>
-    <div>
-      <%= form.label :password %>
-      <%= form.password_field :password %>
-    </div>
-    <div>
-      <%= form.submit "Create Event" %>
-    </div>
-  <% end %>
+  </div>
+</div> %>
+
+  
+</div>
+
+
 </body>
 </html>

@@ -1,4 +1,14 @@
-<h1><%= @event.title %></h1>
+<%= @event.title %>
+<br/>
+<%= @event.description %>
+<br/>
+<%= @event.url_slug %>
+<br/>
+<% @event.schedules.each do |schedule| %>
+  <%= schedule.calendar_date %>
+  <br/>
+<% end %>
+
 <%= render 'events/schedule_table' %>
 <h2>新規登録</h2>
 <%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
@@ -10,3 +20,7 @@
     <%= form.submit "新規追加する" %>
   </div>
 <% end %>
+
+<p class="text-blue-600"><%=link_to "本当はないけど一覧ページに戻る", events_path %></p>
+<%# ↑これは消す %>
+<br/>

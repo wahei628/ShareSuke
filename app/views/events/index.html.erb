@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Events</title>
+  <div class="">
+    <title>Events</title>
+    <p class="text-red-600"><%=link_to "イベント作成ページ", new_event_path %></p>
+    <%# ↑これは消す %>
+  </div>
 </head>
 <body>
   <h1>Events</h1>
   <ul>
+    <p>-----------------------------------</p>
     <% @events.each do |event| %>
       <li>
-        <h2><%= event.title %></h2>
-        <p><%= event.description %></p>
-        <p><%= event.url_slug %></p>
+        <h2><%= "タイトル : #{event.title}" %></h2>
+        <p><%= "内容 : #{event.description}" %></p>
+        <p class="text-blue-600">
+          <%=link_to "url_slug : #{event.url_slug}", event_path(event.friendly_id)%>
+        </p>
+        <% event.schedules.each do |schedule| %>
+          <p><%= schedule.calendar_date %></p>
+        <% end %>
       </li>
+    <p>-----------------------------------</p>
     <% end %>
   </ul>
 </body>
