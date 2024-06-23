@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def create
-    @event = Event.find(params[:event_id])
+    @event = Event.find_by(url_slug: params[:event_url_slug])
     @user = @event.users.build(user_params)
     if @user.save
-      redirect_to event_user_path(@event, @user), notice: "User was successfully created."
+      redirect_to event_path(@event), notice: "User was successfully created."
     else
       redirect_to event_path(@event), alert: "There was an error creating the user."
     end

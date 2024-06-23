@@ -19,7 +19,7 @@
           <%=link_to "url_slug : #{event.url_slug}", event_path(event.friendly_id)%>
         </p>
         <% event.schedules.each do |schedule| %>
-          <p><%= schedule.calendar_date %></p>
+          <p><%= schedule.date %></p>
         <% end %>
       </li>
     <p>-----------------------------------</p>
