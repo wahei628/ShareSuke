@@ -25,7 +25,6 @@ class EventsController < ApplicationController
       params[:event][:dates].split(',').map { |date| date.strip }.reject(&:empty?).uniq.each do |date|
         @event.schedules.create(date: Date.strptime(date, '%Y-%m-%d'))
       end
-      # redirect_to @event, notice: "Event was successfully created."
       redirect_to url_share_event_path(@event.url_slug), notice: "Event was successfully created."
     else
       render :new, status: :unprocessable_entity
