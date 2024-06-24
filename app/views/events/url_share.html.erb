@@ -1,0 +1,26 @@
+<div class="flex items-center justify-center h-screen" data-controller="copy">
+  <div class="card bg-base-100 shadow-xl min-w-fit max-w-md">
+    <div class="card-body">
+      <h2 class="card-title">イベント名: <%= @event.title %></h2>
+      <p><%= @event.description %></p>
+      <div class="flex items-center">
+        <p>イベントページURL: </p>
+        <h3 class="mx-3 flex-grow-0 flex-shrink-0"> 
+          <%= link_to "http://localhost:3001/events/#{@event.url_slug}", event_path(@event.url_slug) ,target: "_blank", class: "text-blue-500 underline", id: "url" %>
+
+          <%# <%= link_to "https://sharesuke.onrender.com/events/#{@event.url_slug}", event_path(@event.url_slug) ,target: "_blank", class: "text-blue-500 underline", id: "url" %>
+          <%# 本番用URL 公開前に変更する %>
+        </h3>
+        <button class="btn btn-xs btn-success flex-grow-0 flex-shrink-0" id="url_copy_btn">コピー</button>
+        <div class="tooltip tooltip-open tooltip-right hidden mb-2" id="url_done" data-tip="コピーしました！"></div>
+      </div>
+      <div class="flex items-center">
+        <h1>パスワード: </h1>
+        <p id="password" class="flex-grow-0 flex-shrink-0 font-bold px-2"><%= @event.password %></p>
+        <button class="btn btn-xs btn-success flex-grow-0 flex-shrink-0" id="password_copy_btn">コピー</button>
+        <div class="tooltip tooltip-open tooltip-right hidden mb-2" id="password_dane" data-tip="コピーしました！"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_include_tag "copy" %>
