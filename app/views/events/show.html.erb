@@ -10,8 +10,10 @@
 <% end %>
 
 <%= render 'events/schedule_table' %>
+
 <h2>新規登録</h2>
 <%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
+  <%= hidden_field_tag :event_url_slug, @event.url_slug %>
   <div>
     <%= form.label :name, "名前" %>
     <%= form.text_field :name %>
@@ -21,6 +23,45 @@
   </div>
 <% end %>
 
-<p class="text-blue-600"><%=link_to "本当はないけど一覧ページに戻る", events_path %></p>
-<%# ↑これは消す %>
-<br/>
+<h3>Comments</h3>
+<% Comment.joins(:user).where(users: { event_id: @event.id }).each do |comment| %>
+  <p><%= comment.user.name %>: <%= comment.body %></p>
+<% end %>
+
+<h3>Add a Comment</h3>
+<% @event.users.each do |user| %>
+  <%= link_to user.name, '#', class: 'select-user', data: { user_id: user.id } %><br>
+<% end %>
+
+<%= form_with(model: Comment.new, url: event_comments_path(@event), local: true, id: 'comment_form') do |form| %>
+  <%= hidden_field_tag :user_id, nil, id: 'user_id_field' %>
+  <div>
+    <%= form.label :body, "Comment" %>
+    <%= form.text_area :body %>
+  </div>
+  <div>
+    <%= form.submit "Post Comment" %>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('turbo:load', function() {
+    document.querySelectorAll('.select-user').forEach(function(element) {
+      element.addEventListener('click', function(event) {
+        event.preventDefault();
+        var userId = this.dataset.userId;
+        document.getElementById('user_id_field').value = userId;
+      });
+    });
+
+    document.getElementById('comment_form').addEventListener('submit', function(event) {
+      var userId = document.getElementById('user_id_field').value;
+      if (!userId) {
+        event.preventDefault();
+        alert('Please select a user before submitting the comment.');
+      }
+    });
+  });
+</script>
+
+<p class="text-blue-600"><%= link_to "本当はないけど一覧ページに戻る", events_path %></p>

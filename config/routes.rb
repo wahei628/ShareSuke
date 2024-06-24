@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get :url_share
     end
     resources :users, only: %i[create edit update destroy]
+    resources :comments, only: [:create]
   end
 
 end
