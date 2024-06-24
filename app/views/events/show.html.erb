@@ -22,13 +22,13 @@
     <%= form.submit "新規追加する" %>
   </div>
 <% end %>
-
-<h3>Comments</h3>
+<p>-----------------------------------</p>
+<h3>コメント（ユーザー名をクリック後コメントを投稿）</h3>
 <% Comment.joins(:user).where(users: { event_id: @event.id }).each do |comment| %>
   <p>(<%= comment.user.name %>) <%= comment.body %> [<%= comment.created_at.strftime('%-m/%-d %H:%M') %>]</p>
 <% end %>
-
-<h3>Add a Comment</h3>
+<p>-----------------------------------</p>
+<h3>コメントを追加</h3>
 <% @event.users.each do |user| %>
   <%= link_to user.name, '#', class: 'select-user', data: { user_id: user.id } %><br>
 <% end %>
@@ -43,6 +43,7 @@
     <%= form.submit "Post Comment" %>
   </div>
 <% end %>
+<p>-----------------------------------</p>
 
 <script>
   document.addEventListener('turbo:load', function() {
@@ -58,7 +59,7 @@
       var userId = document.getElementById('user_id_field').value;
       if (!userId) {
         event.preventDefault();
-        alert('Please select a user before submitting the comment.');
+        alert('ユーザ名をクリックして選択をしてください');
       }
     });
   });
