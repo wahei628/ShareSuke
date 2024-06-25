@@ -1,0 +1,29 @@
+<p>-----------------------------------</p>
+<h3>コメント</h3>
+<% Comment.joins(:user).where(users: { event_id: @event.id }).each do |comment| %>
+  <p>(<%= comment.user.name %>) <%= comment.body %> [<%= comment.created_at.strftime('%-m/%-d %H:%M') %>]</p>
+<% end %>
+<p>-----------------------------------</p>
+<h3>コメントをする（ユーザー名をクリック後コメントを投稿）</h3>
+<% @event.users.each do |user| %>
+  <button type="button" class="btn-xs select-user btn btn-primary" data-user-id="<%= user.id %>" data-user-name="<%= user.name %>"><%= user.name %></button><br>
+<% end %>
+
+<div class="tooltip tooltip-open tooltip-right hidden mb-2" id="user_selected_tooltip"></div>
+
+<%= form_with(model: Comment.new, url: event_comments_path(@event), local: true, id: 'comment_form') do |form| %>
+  <%= hidden_field_tag :user_id, nil, id: 'user_id_field' %>
+  <div>
+    <%= form.text_area :body %>
+  </div>
+  <div>
+    <button class="btn btn-xs btn-success flex-grow-0 flex-shrink-0">コメント投稿</button>
+  </div>
+<% end %>
+<p>-----------------------------------</p>
+
+
+<script>
+
+</script>
+<%= javascript_include_tag "comment" %>

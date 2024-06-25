@@ -10,8 +10,10 @@
 <% end %>
 
 <%= render 'events/schedule_table' %>
+
 <h2>新規登録</h2>
 <%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
+  <%= hidden_field_tag :event_url_slug, @event.url_slug %>
   <div>
     <%= form.label :name, "名前" %>
     <%= form.text_field :name %>
@@ -21,6 +23,9 @@
   </div>
 <% end %>
 
-<p class="text-blue-600"><%=link_to "本当はないけど一覧ページに戻る", events_path %></p>
-<%# ↑これは消す %>
-<br/>
+<%= render 'events/comment_area' %>
+
+
+
+
+<p class="text-blue-600"><%= link_to "本当はないけど一覧ページに戻る", events_path %></p>

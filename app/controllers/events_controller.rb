@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def index
     @events = Event.all
+    @comments = Comment.all # 全てのコメントを取得
   end
 
   def show
@@ -9,6 +10,8 @@ class EventsController < ApplicationController
       @dates = @event.schedules.build
       @users = @event.users
       @user = User.new
+      @comments = Comment.all # 全てのコメントを取得
+      @comment = Comment.new
     else
       redirect_to events_path
     end
