@@ -22,56 +22,10 @@
     <%= form.submit "新規追加する" %>
   </div>
 <% end %>
-<p>-----------------------------------</p>
-<h3>コメント</h3>
-<% Comment.joins(:user).where(users: { event_id: @event.id }).each do |comment| %>
-  <p>(<%= comment.user.name %>) <%= comment.body %> [<%= comment.created_at.strftime('%-m/%-d %H:%M') %>]</p>
-<% end %>
-<p>-----------------------------------</p>
-<h3>コメントを追加（ユーザー名をクリック後コメントを投稿）</h3>
-<% @event.users.each do |user| %>
-  <%= link_to user.name, '#', class: 'select-user', data: { user_id: user.id } %><br>
-<% end %>
-<div class="tooltip tooltip-open tooltip-right hidden mb-2" id="user_selected_tooltip" data-tip="選択されました！"></div>
-<%= form_with(model: Comment.new, url: event_comments_path(@event), local: true, id: 'comment_form') do |form| %>
-  <%= hidden_field_tag :user_id, nil, id: 'user_id_field' %>
-  <div>
-    <%= form.label :body, "Comment" %>
-    <%= form.text_area :body %>
-  </div>
-  <div>
-    <%= form.submit "Post Comment" %>
-  </div>
-<% end %>
-<p>-----------------------------------</p>
+
+<%= render 'events/comment_area' %>
 
 
-<script>
-  document.addEventListener('turbo:load', function() {
-    document.querySelectorAll('.select-user').forEach(function(element) {
-      element.addEventListener('click', function(event) {
-        event.preventDefault();
-        var userId = this.dataset.userId;
-        document.getElementById('user_id_field').value = userId;
-
-        var tooltip = document.getElementById('user_selected_tooltip');
-        tooltip.classList.remove('hidden');
-        
-        setTimeout(function() {
-          tooltip.classList.add('hidden');
-        }, 2000);
-      });
-    });
-
-    document.getElementById('comment_form').addEventListener('submit', function(event) {
-      var userId = document.getElementById('user_id_field').value;
-      if (!userId) {
-        event.preventDefault();
-        alert('ユーザ名をクリックして選択をしてください');
-      }
-    });
-  });
-</script>
 
 
 <p class="text-blue-600"><%= link_to "本当はないけど一覧ページに戻る", events_path %></p>
