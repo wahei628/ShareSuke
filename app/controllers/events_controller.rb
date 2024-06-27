@@ -24,6 +24,7 @@ class EventsController < ApplicationController
   
   def create
     @event = Event.new(event_params.except(:dates))
+    @event.password=(params[:password]) if params[:password].present?
     if @event.save
       params[:event][:dates].split(',').map { |date| date.strip }.reject(&:empty?).uniq.each do |date|
         @event.schedules.create(date: Date.strptime(date, '%Y-%m-%d'))
