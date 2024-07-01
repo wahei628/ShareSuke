@@ -30,13 +30,18 @@ class Event < ApplicationRecord
 
   # 認証用メソッド, passwordがなければ新しく生成
   def password
+    return nil if password_hash.blank?
     @password ||= BCrypt::Password.new(password_hash)
   end
 
   # passwordを新規で作成
   def password=(new_password)
-    @password = BCrypt::Password.create(new_password)
-    self.password_hash = @password
+    if new_password.blank?
+      self.password_hash = nil
+    else
+      @password = BCrypt::Password.create(new_password)
+      self.password_hash = @password
+    end
   end
 
 end

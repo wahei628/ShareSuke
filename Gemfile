@@ -59,6 +59,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
 
   gem 'rubocop', '~> 1.64', require: false
+
+  #--- デバッグの為追加
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  #---
 end
 
 group :development do
