@@ -13,8 +13,6 @@ class Event < ApplicationRecord
 
   extend FriendlyId # モジュールのメソッドをクラスメソッドとして追加
   friendly_id :random_slug, use: :slugged, slug_column: 'url_slug' # urlをランダムにする
-  attr_accessor :password_confirmation
-
   def random_slug        # 30文字のランダムな文字列を生成
     # url_slug ある場合は return
     return url_slug unless url_slug.blank?
@@ -31,7 +29,7 @@ class Event < ApplicationRecord
   # 認証用メソッド, passwordがなければ新しく生成
   def password
     return nil if password_hash.blank?
-    @password ||= BCrypt::Password.new(password_hash)
+    BCrypt::Password.new(password_hash)
   end
 
   # passwordを新規で作成
