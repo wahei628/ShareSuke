@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    if @event.password_hash.blank? || session[:event_access]
+    if @event.password_hash.blank? || session[:event_access] == @event.id
       @dates = @event.schedules.build
       @users = @event.users
       @user = User.new
@@ -45,7 +45,7 @@ class EventsController < ApplicationController
   def post_entry_password
     if @event.password == params[:password]
       # セッションにidを保存
-      session[:event_access] = true
+      session[:event_access] = @event.id
       redirect_to event_path(@event.url_slug)
     else
       flash[:alert] = "パスワードが違います"
