@@ -39,9 +39,17 @@
       <div>
         <%= f.label :password, "合言葉" %>
         <div class="input input-bordered w-full max-w-xs">
-        <%= f.password_field :password %>
+          <%= f.password_field :password, id: 'password-field' %>
         </div>
       </div>
+
+      <div class="flex items-center my-3">
+        <h1>パスワード設定値: </h1>
+        <p id="password" class="flex-grow-0 flex-shrink-0 font-bold px-2"></p>
+        <button type="button" class="btn btn-xs btn-success flex-grow-0 flex-shrink-0" id="password_copy_btn">コピー</button>
+        <div class="tooltip tooltip-open tooltip-right hidden mb-2" id="password_tooltip" data-tip="コピーしました！"></div>
+      </div>
+
       <br/>
       <br/>
       <br/>
@@ -51,17 +59,10 @@
     <% end %>
   </div>
 </div>
-
-<%# <div class="card w-96 bg-base-100 shadow-xl">
-  <div class="card-body">
-    <h1 class="card-title">イベント作成ページに戻る</h1>
-    </div>
-  </div>
-</div> %>
-
-  
 </div>
 
+<%= javascript_include_tag "password" %>
 
 </body>
 </html>
+

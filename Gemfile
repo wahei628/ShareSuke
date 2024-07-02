@@ -38,7 +38,7 @@ gem "jbuilder"
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt"
 
 # URLcreategem
 gem 'friendly_id', '~> 5.5.0'
@@ -59,6 +59,11 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.1.0'
 
   gem 'rubocop', '~> 1.64', require: false
+
+  #--- デバッグの為追加
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  #---
 end
 
 group :development do
