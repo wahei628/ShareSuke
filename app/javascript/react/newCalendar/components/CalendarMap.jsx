@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { getAdjustedDate, formatDate, isToday } from './dateUtils';
-import { toggleDateSelection } from './dateSelection';
+import React, { useEffect, useState } from 'react';
+import { formatDate, getAdjustedDate, isToday } from '../dateUtil';
+import { toggleDateSelection } from '../date.Selection';
+
 
 const CalendarMap = ({ currentYear, currentMonth, calendarDays }) => {
   const [selectedDates, setSelectedDates] = useState([]);
@@ -8,8 +9,9 @@ const CalendarMap = ({ currentYear, currentMonth, calendarDays }) => {
   useEffect(() => {
     console.log('Selected dates:', selectedDates);
   }, [selectedDates]);
-
+  
   const handleDateSelection = (day) => {
+    // console.log("baka");
     toggleDateSelection(day, currentYear, currentMonth, setSelectedDates);
   };
 

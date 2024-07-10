@@ -1,7 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import DynamicCalendar from './components/newCalendar/Calendar';
+import DynamicCalendar from './newCalendar/components/Calendar';
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const CalendarRoot = document.getElementById("react");

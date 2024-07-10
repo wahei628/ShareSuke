@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { generateCalendarDays } from './generateDays';
-import DayOfWeek from './components/DayOfWeek';
-import CalendarMap from './components/CalendarMap';
-
-// import { generateCalendarDays } from './generateDays';
-// import DayOfWeek from './components/DayOfWeek';
-// import CalendarMap from './components/CalendarMap';
+import { generateCalendarDays } from '../generateDays';
+import CalendarMap from './CalendarMap';
+import DayOfWeek from './DayOfWeek';
+// import { generateCalendarDays } from '../generateDays';
+// import CalendarMap from './CalendarMap';
+// import DayOfWeek from './DayOfWeek';
 
 
 const DynamicCalendar = () => {
@@ -41,7 +40,8 @@ const DynamicCalendar = () => {
           <CalendarMap
             currentYear={currentDate.getFullYear()}
             currentMonth={currentDate.getMonth() + 1}
-            calendarDays={calendarDays} />
+            calendarDays={calendarDays} 
+            />
         </table>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { React } from 'react';
-import { getFirstDayOfMonth, getPrevMonthDays, getDaysInMonth } from './getDateInfo';
+import { getDaysInMonth, getFirstDayOfMonth, getPrevMonthDays } from './getDateInfo';
+
 
 export const generateCalendarDays = (date) => {
   const days = [];

@@ -1,4 +1,6 @@
-  import React from 'react';
+  import { getAdjustedDate } from '../javascript/react/newCalendar/dateUtil';
+
+
   
   // 日付を 'YYYY-MM-DD' 形式にフォーマットする関数
 const formatDate = (year, month, day) => {
@@ -11,7 +13,7 @@ const toggleDateSelection = (day) => {
   const today = new Date(new Date().setHours(0, 0, 0, 0));
   const selectedDate = new Date(dateString);
   
-  if (selectedDate > today) {
+  // if (selectedDate > today) {
     
     setSelectedDates(prevDates => {
       if (prevDates.includes(dateString)) {

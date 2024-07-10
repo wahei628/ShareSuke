@@ -1,4 +1,5 @@
-import { getAdjustedDate, formatDate } from './dateUtils';
+import { formatDate, getAdjustedDate } from "./dateUtil";
+
 
 export const toggleDateSelection = (day, currentYear, currentMonth, setSelectedDates) => {
   const { year, month } = getAdjustedDate(day, currentYear, currentMonth);
