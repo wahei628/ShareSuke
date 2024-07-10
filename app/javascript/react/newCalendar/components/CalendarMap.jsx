@@ -34,8 +34,8 @@ const CalendarMap = ({ currentYear, currentMonth, calendarDays }) => {
                   className={`w-8 h-8 rounded-lg focus:outline-none focus:ring-blue-300 
                     ${
                     day.isCurrentMonth 
-                      ? 'text-gray-900 hover:bg-blue-300' 
-                      : 'text-gray-300 hover:bg-blue-200 hover:text-gray-400'
+                      ? 'text-gray-900 hover:bg-blue-200' 
+                      : 'text-gray-400 hover:bg-blue-100 hover:text-gray-500'
                   } 
                     ${isCurrentDay && !isSelected
                       ? 'bg-yellow-200 text-gray-900 hover:bg-yellow-300'
@@ -48,7 +48,7 @@ const CalendarMap = ({ currentYear, currentMonth, calendarDays }) => {
                       : ''
                     : 
                     selectedDates.includes(dateString)
-                      ? 'text-black bg-blue-200'
+                      ? 'text-gray-600 bg-blue-200'
                       : ''
                   } transition-colors`}
                 >
