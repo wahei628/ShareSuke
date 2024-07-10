@@ -1,0 +1,44 @@
+import React, { useState } from 'react';
+import { getDaysInMonth, getFirstDayOfMonth, getPrevMonthDays } from './getDateInfo';
+import { generateCalendarDays } from './generateDays';
+import DayOfWeek from './components/dayOfWeek';
+import CalendarMap from './components/calendarMap';
+
+const DynamicCalendar = () => {
+  const [currentDate, setCurrentDate] = useState(new Date());
+  
+  const changeMonth = (increment) => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + increment, 1));
+  };
+  
+  const calendarDays = generateCalendarDays(currentDate);
+
+  return (
+    <div className="min-h-screen flex-col flex justify-center items-center bg-gray-100">
+      <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Calendar</h1>
+        <div className="mb-6 flex justify-between items-center">
+          <button onClick={() => changeMonth(-1)} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <h2 className="text-xl font-semibold text-gray-700">
+            {currentDate.toLocaleString('default', { year: 'numeric', month: 'long' })}
+          </h2>
+          <button onClick={() => changeMonth(1)} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
+        <table className="w-full">
+          <DayOfWeek />
+          <CalendarMap calendarDays={calendarDays} />
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default DynamicCalendar;

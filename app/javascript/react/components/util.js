@@ -12,5 +12,6 @@ export const getMonth = (month = dayjs().month()) => {               // デフ�
       return dayjs(new Date(year, month, currentMonthCount));        // 日付オブジェクトを生成して return
     });
   });                                                                // [ 7要素  7要素  7要素  7要素  7要素  ] このような 5x7 の 2次元配列になっている
+  console.log(`daysMatrix: ${daysMatrix}`)
   return daysMatrix;
 }

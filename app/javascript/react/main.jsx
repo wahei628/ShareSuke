@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DynamicCalendar from './components/Calendar';
-import App from './reactCalendar/App';
+import App from './App';
+import DynamicCalendar from './components/newCalendar/Calendar';
 
 document.addEventListener("DOMContentLoaded", () => {
   const CalendarRoot = document.getElementById("react");
@@ -9,9 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
   <div >
     <div className="card bg-base-100 w-96 shadow-xl">
       <div className="card-actions justify-end">
-          <App />
+        <DynamicCalendar />
       </div>
     </div>
+    <div className="red.400"> red </div>
   </div>
   );
 })
