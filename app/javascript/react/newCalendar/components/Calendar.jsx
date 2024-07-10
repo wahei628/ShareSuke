@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { generateCalendarDays } from '../generateDays';
-import CalendarMap from './CalendarMap';
 import DayOfWeek from './DayOfWeek';
+import CalendarMap from './CalendarMap';
 // import { generateCalendarDays } from '../generateDays';
 // import CalendarMap from './CalendarMap';
 // import DayOfWeek from './DayOfWeek';
