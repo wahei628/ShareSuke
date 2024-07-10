@@ -13,8 +13,7 @@ export const toggleDateSelection = (day, currentYear, currentMonth, setSelectedD
         return prevDates.filter(d => d !== dateString);
       } else {
         if (new Date(dateString) < new Date()) {
-          // 注意: この条件文の中身が空です。
-          // 必要に応じて適切な処理を追加してください。
+          // 選択した日付が過去のときにする処理をここに書く
         }
         
         let dateList = [...prevDates, dateString];
