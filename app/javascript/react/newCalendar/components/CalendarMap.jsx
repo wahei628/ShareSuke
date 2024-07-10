@@ -23,7 +23,7 @@ const CalendarMap = ({ currentYear, currentMonth, calendarDays }) => {
             const { year, month } = getAdjustedDate(day, currentYear, currentMonth);
             const dateString = formatDate(year, month, day.day);
             const isCurrentDay = isToday(year, month, day.day);
-            const isSelected = selectedDates.includes(dateString);
+            const isSelected = selectedDates.includes(dateString);            
             return (
               <td 
                 key={dayIndex} 
