@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useState } from 'react';
-import { CalendarHeader } from './components/CalendarHeader';
-import { Sidebar } from './components/Sidebar';
-import { Month } from './components/month';
-import { getMonth } from './components/util';
+import { CalendarHeader } from './components/newCalendar/CalendarHeader';
+import { Sidebar } from './components/newCalendar/Sidebar';
+import { Month } from './components/newCalendar/month';
+import { getMonth } from '../util';
 
 const App = () => {
   const [currentMonth, setCurrentMonth] = useState(getMonth())

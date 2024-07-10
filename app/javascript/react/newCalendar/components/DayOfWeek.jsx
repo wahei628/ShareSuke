@@ -4,7 +4,7 @@ import React from 'react';
 const DayOfWeek = () => (
     <thead>
       <tr>
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
           <th key={day} className="py-2 text-sm font-medium text-gray-600">
             {day}
           </th>
