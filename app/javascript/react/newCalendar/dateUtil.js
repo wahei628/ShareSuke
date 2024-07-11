@@ -4,7 +4,7 @@ export const getAdjustedDate = (day, currentYear, currentMonth) => {
   let year = currentYear;
   let month = currentMonth;
   
-  if (!day.isCurrentMonth) {
+  if (!(day.isCurrentMonth)) {
     if (day.day > 20) {
       month -= 1;
       if (month === 0) {
