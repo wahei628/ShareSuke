@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_27_134200) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_13_122516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,6 +19,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_134200) do
     t.text "body", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_comments_on_event_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -33,7 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_134200) do
 
   create_table "schedules", force: :cascade do |t|
     t.bigint "event_id", null: false
-    t.date "calendar_date", null: false
+    t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_schedules_on_event_id"
@@ -58,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_134200) do
     t.index ["event_id"], name: "index_users_on_event_id"
   end
 
+  add_foreign_key "comments", "events"
   add_foreign_key "comments", "users"
   add_foreign_key "schedules", "events"
   add_foreign_key "user_schedules", "schedules"
