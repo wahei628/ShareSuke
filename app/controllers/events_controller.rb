@@ -10,7 +10,7 @@ class EventsController < ApplicationController
       @dates = @event.schedules.build
       @users = @event.users
       @user = User.new
-      @comments = Comment.joins(:user).where(users: { event_id: @event.id })
+      @comments = Comment.all # 全てのコメントを取得
       @comment = Comment.new
     else
       redirect_to entry_password_event_path(@event.url_slug)
