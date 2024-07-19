@@ -16,8 +16,4 @@ export const getPrevMonthDays   = (date) => getDaysInMonth(createDate(date.getFu
   
   // getFirstDayOfMonth 1日目の曜日を返す => 月の最初の日の曜日がわかる
   
-  // getPreviousMonth 
-
-
-  // dateUtils.js
 

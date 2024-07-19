@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { generateCalendarDays } from '../generateDays';
-import DayOfWeek from './DayOfWeek';
+import { generateCalendarDays } from '../utils/generateDays';
 import CalendarMap from './CalendarMap';
+import DayOfWeek from './DayOfWeek';
 
 
 const DynamicCalendar = () => {
@@ -14,9 +14,8 @@ const DynamicCalendar = () => {
   const calendarDays = generateCalendarDays(currentDate);
 
   return (
-    <div className="min-h-screen flex-col flex justify-center items-center bg-gray-100">
+    <div className="min-h-screen flex-col flex justify-center items-center">
       <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Calendar</h1>
         <div className="mb-6 flex justify-between items-center">
           <button onClick={() => changeMonth(-1)} className="p-2 rounded-full hover:bg-gray-200 transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
