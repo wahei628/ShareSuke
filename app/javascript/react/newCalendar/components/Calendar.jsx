@@ -6,11 +6,6 @@ import DayOfWeek from './DayOfWeek';
 
 const DynamicCalendar = ({selectedDates, setSelectedDates}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  
-  const changeMonth = (increment) => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + increment, 1));
-  };
-  
   const calendarDays = generateCalendarDays(currentDate);
 
   return (

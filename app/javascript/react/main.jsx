@@ -4,10 +4,14 @@ import { CalendarForm } from './newCalendar/components/CalendarFrom';
 import ScheduleTable from "./newSchedule/components/ScheduleTable";
 
 
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("turbo:load", () => {
   const CalendarRoot = document.getElementById("react-calendar-form");
-  CalendarRoot && createRoot(CalendarRoot).render(<CalendarForm />);
+  if (CalendarRoot && !CalendarRoot.hasChildNodes()) {
+    createRoot(CalendarRoot).render(<CalendarForm />);
+  }
+});
 
+document.addEventListener("DOMContentLoaded", () => {
   const node = document.getElementById("schedule-table");
   if (node) {
     const users = JSON.parse(node.getAttribute("data-users"));
