@@ -7,7 +7,10 @@ import DayOfWeek from './DayOfWeek';
 const DynamicCalendar = ({selectedDates, setSelectedDates}) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const calendarDays = generateCalendarDays(currentDate);
-
+  const changeMonth = (increment) => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + increment, 1));
+  };
+  
   return (
       <div className="flex-col flex">
         <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md border border-cyan-200">
