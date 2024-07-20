@@ -1,8 +1,10 @@
 <p>-----------------------------------</p>
 <h3>コメント</h3>
-<% Comment.joins(:user).where(users: { event_id: @event.id }).each do |comment| %>
-  <p>(<%= comment.user.name %>) <%= comment.body %> [<%= comment.created_at.strftime('%-m/%-d %H:%M') %>]</p>
-<% end %>
+<div id="comments" data-event-id="<%= @event.id %>">
+  <% @comments.each do |comment| %>
+    <%= render partial: 'comments/comment', locals: { comment: comment } %>
+  <% end %>
+</div>
 <p>-----------------------------------</p>
 <h3>コメントをする（ユーザー名をクリック後コメントを投稿）</h3>
 <% @event.users.each do |user| %>
@@ -22,8 +24,4 @@
 <% end %>
 <p>-----------------------------------</p>
 
-
-<script>
-
-</script>
 <%= javascript_include_tag "comment" %>

@@ -1,9 +1,26 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { CalendarForm } from './newCalendar/components/CalendarFrom';
+import ScheduleTable from "./newSchedule/components/ScheduleTable";
 
 
 document.addEventListener("DOMContentLoaded", () => {
   const CalendarRoot = document.getElementById("react-calendar-form");
   CalendarRoot && createRoot(CalendarRoot).render(<CalendarForm />);
-})
+
+  const node = document.getElementById("schedule-table");
+  if (node) {
+    const users = JSON.parse(node.getAttribute("data-users"));
+    const schedules = JSON.parse(node.getAttribute("data-schedules"));
+    const eventUrlSlug = node.getAttribute("data-event-url-slug");
+
+    createRoot(node).render(
+      <ScheduleTable
+        users={users}
+        schedules={schedules}
+        eventUrlSlug={eventUrlSlug}
+      />
+    );
+  }
+});
+
