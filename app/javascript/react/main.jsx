@@ -1,14 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import DynamicCalendar from './newCalendar/components/Calendar';
-import { Form } from './Form/NewEventsFrom';
+import { CalendarForm } from './newCalendar/components/CalendarFrom';
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const CalendarRoot = document.getElementById("react");
-  CalendarRoot && createRoot(CalendarRoot).render(<DynamicCalendar />);
-
-  const FormRoot = document.getElementById("form");
-  FormRoot && createRoot(FormRoot).render(<Form />);
-
+  const CalendarRoot = document.getElementById("react-calendar-form");
+  CalendarRoot && createRoot(CalendarRoot).render(<CalendarForm />);
 })

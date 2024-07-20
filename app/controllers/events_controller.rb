@@ -25,9 +25,10 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params.except(:dates))
     @event.password=(params[:password]) if params[:password].present?
+    dates = JSON.parse(params[:event][:dates]).map { |date_string| Date.parse(date_string) }
     if @event.save
-      params[:event][:dates].split(',').map { |date| date.strip }.reject(&:empty?).uniq.each do |date|
-        @event.schedules.create(date: Date.strptime(date, '%Y-%m-%d'))
+      dates.each do |date|
+        @event.schedules.create(date: date)
       end
       redirect_to url_share_event_path(@event.url_slug), notice: "Event was successfully created."
     else
