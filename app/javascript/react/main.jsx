@@ -1,22 +1,14 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import DynamicCalendar from "./newCalendar/components/Calendar";
-import { render } from "react-dom";
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { CalendarForm } from './newCalendar/components/CalendarForm';
 import ScheduleTable from "./newSchedule/components/ScheduleTable";
 
-document.addEventListener("DOMContentLoaded", () => {
-  const CalendarRoot = document.getElementById("react");
-  CalendarRoot &&
-    createRoot(CalendarRoot).render(
-      <div>
-        <div className="card bg-base-100 w-96 shadow-xl">
-          <div className="card-actions justify-end">
-            <DynamicCalendar />
-          </div>
-        </div>
-        <div className="red.400"> red </div>
-      </div>
-    );
+
+  document.addEventListener("turbo:load", () => {
+  const CalendarRoot = document.getElementById("react-calendar-form");
+  if (CalendarRoot && !CalendarRoot.hasChildNodes()) {
+    createRoot(CalendarRoot).render(<CalendarForm />);
+  }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -26,13 +18,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const schedules = JSON.parse(node.getAttribute("data-schedules"));
     const eventUrlSlug = node.getAttribute("data-event-url-slug");
 
-    render(
+    createRoot(node).render(
       <ScheduleTable
         users={users}
         schedules={schedules}
         eventUrlSlug={eventUrlSlug}
-      />,
-      node
+      />
     );
   }
 });
+

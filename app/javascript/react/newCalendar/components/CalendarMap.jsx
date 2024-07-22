@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { formatDate, getAdjustedDate, isToday } from '../dateUtil';
-import { toggleDateSelection } from '../date.Selection';
+import { toggleDateSelection } from '../utils/dateSelectionSort';
+import { formatDate, getAdjustedDate, isToday } from '../utils/dateUtil';
 
 
-const CalendarMap = ({ currentYear, currentMonth, calendarDays }) => {
-  const [selectedDates, setSelectedDates] = useState([]);
+const CalendarMap = ({ currentYear, currentMonth, calendarDays, selectedDates, setSelectedDates }) => {
 
   useEffect(() => {
     console.log('Selected dates:', selectedDates);
   }, [selectedDates]);
   
   const handleDateSelection = (day) => {
-    // console.log("baka");
     toggleDateSelection(day, currentYear, currentMonth, setSelectedDates);
   };
 
@@ -25,11 +23,12 @@ const CalendarMap = ({ currentYear, currentMonth, calendarDays }) => {
             const isCurrentDay = isToday(year, month, day.day);
             const isSelected = selectedDates.includes(dateString);            
             return (
-              <td 
-                key={dayIndex} 
+              <td
+                key={dayIndex}
                 className={`py-2 text-center`}
               >
                 <button
+                  type="button"
                   onClick={() => handleDateSelection(day)}
                   className={`w-8 h-8 rounded-lg focus:outline-none focus:ring-blue-300 
                     ${

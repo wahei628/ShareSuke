@@ -10,5 +10,4 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
   end
   resources :user_schedules, only: [:index, :create]
-  get "react_test" => "react_test#index"
 end

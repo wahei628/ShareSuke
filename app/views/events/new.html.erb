@@ -3,9 +3,8 @@
 <head>
   <title>New Event</title>
 </head>
-<body>
 
-<div class="h-screen flex justify-center items-center m-[30px] p-[40px] ">
+<div class="flex items-center justify-center m-[20px] p-[10px]">
   <div class="card-body shadow-2xl">
     <h1 class="card-title">イベント新規作成</h1>
     <%= form_with model: @event, url:events_path, local: true do |f| %>
@@ -16,8 +15,6 @@
         </div>
       </div>
       <br/>
-      <br/>
-      <br/>
       <div>
         <%= f.label :description, "内容" %>
         <div class="input input-bordered w-full max-w-xs">
@@ -25,16 +22,14 @@
         </div>
       </div>
       <br/>
+      <div>
       <br/>
-      <div>
-      <div>
-        <%= f.label :dates, "日付" %>
-        <div class="input input-bordered w-full max-w-xs">
-          <%= f.text_field :dates %>
-        </div>
+      <div class="mr-24">
+        <%= f.label :dates, '日付'%>
+        <%= f.hidden_field :dates %>          
+          <div id="react-calendar-form"></div>
       </div>
       </div>
-      <br/>
       <br/>
       <div>
         <%= f.label :password, "合言葉" %>
@@ -53,12 +48,11 @@
       <br/>
       <br/>
       <br/>
-      <div class="btn btn-primary">
-        <%= f.submit "Create Event" %>
-      </div>
+      <button type="submit" class="btn border border-blue-200 hover:bg-cyan-100">
+        <%= f.submit "イベントページを作成する", class: "cursor-pointer"%>
+      </button>
     <% end %>
   </div>
-</div>
 </div>
 
 <%= javascript_include_tag "password" %>
