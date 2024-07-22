@@ -10,7 +10,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
 
   useEffect(() => {
     axios
-      .get("/user_schedules")
+      .get("/user_schedules") // スケジュールデータ取得のgetリクエスト送信
       .then((response) => {
         const data = response.data;
         const newSelections = {};
@@ -20,7 +20,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
             newSelections[item.schedule_id] = {};
           }
 
-          const statusMap = { 1: "O", 2: "X", 3: "△" };
+          const statusMap = { 1: "O", 2: "X", 3: "△" }; // ステータスの数値を文字に変換
           newSelections[item.schedule_id][item.user_id] =
             statusMap[item.status];
         });
@@ -41,9 +41,11 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
       },
     }));
 
+    // ステータスの文字を数値に変換
     const statusMap = { O: 1, X: 2, "△": 3 };
     const status = statusMap[label];
-
+    
+    // APIにリクエストを送信
     axios
       .post("/user_schedules", {
         user_schedule: {
@@ -67,6 +69,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
     ).length;
   };
 
+  // ステータスのまとめ
   const StatusBadge = ({ icon: Icon, count, iconColor, textColor, borderColor }) => (
     <div className={`relative inline-flex items-center justify-center w-6 h-6 mr-4 rounded-lg ${iconColor}`}>
       <Icon className="w-6 h-6 absolute" />

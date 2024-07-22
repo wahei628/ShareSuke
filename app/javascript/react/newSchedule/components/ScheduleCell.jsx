@@ -15,8 +15,8 @@ const ScheduleCell = ({ label, isSelected, onClick }) => {
 
   const getIcon = () => {
     const iconStyle = {
-      filter: 'url(#bold)',  // SVGフィルターを適用
-      strokeWidth: '1',  // アイコンの線を太くする
+      filter: 'url(#bold)',    // SVGフィルターを適用
+      strokeWidth: '1',        // アイコンの線を太くする
       stroke: 'currentColor',  // 線の色を現在の文字色に合わせる
     };
 
