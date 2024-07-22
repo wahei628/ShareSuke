@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { CalendarForm } from './newCalendar/components/CalendarFrom';
+import { CalendarForm } from './newCalendar/components/CalendarForm';
 import ScheduleTable from "./newSchedule/components/ScheduleTable";
 
 
