@@ -76,10 +76,10 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         className={`relative z-10 text-lg font-bold ${textColor}`}
         style={{
           textShadow: `
-            -2px -2px 0 ${borderColor},
-            2px -2px 0 ${borderColor},
-            -2px 2px 0 ${borderColor},
-            2px 2px 0 ${borderColor}
+            -1px -1px 0 ${borderColor},
+            1px -1px 0 ${borderColor},
+            -1px 1px 0 ${borderColor},
+            1px 1px 0 ${borderColor}
           `
         }}
       >{count}</span>
