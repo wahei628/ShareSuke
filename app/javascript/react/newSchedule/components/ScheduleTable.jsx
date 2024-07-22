@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import ScheduleCell from "./ScheduleCell";
-import axios from "axios"; // http通信を行えるjavacriptライブラリ
+import axios from "axios";
 
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const [selections, setSelections] = useState({});
 
-  // 初期化時に選択状態を取得
   useEffect(() => {
     axios
-      .get("/user_schedules") // スケジュールデータ取得のgetリクエスト送信
+      .get("/user_schedules")
       .then((response) => {
-        // 成功時の挙動
         const data = response.data;
         const newSelections = {};
 
@@ -19,7 +17,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
             newSelections[item.schedule_id] = {};
           }
 
-          const statusMap = { 1: "O", 2: "X", 3: "△" }; // ステータスの数値を文字に変換
+          const statusMap = { 1: "O", 2: "X", 3: "△" };
           newSelections[item.schedule_id][item.user_id] =
             statusMap[item.status];
         });
@@ -27,7 +25,6 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         setSelections(newSelections);
       })
       .catch((error) => {
-        // エラー時の挙動
         console.error("Error fetching data:", error);
       });
   }, []);
@@ -41,11 +38,9 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
       },
     }));
 
-    // ステータスの文字を数値に変換
     const statusMap = { O: 1, X: 2, "△": 3 };
     const status = statusMap[label];
 
-    // APIにリクエストを送信
     axios
       .post("/user_schedules", {
         user_schedule: {
@@ -70,66 +65,69 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   };
 
   return (
-    <div>
-      <h2>Schedules</h2>
-      <table
-        style={{
-          border: "1px solid white",
-          borderCollapse: "collapse",
-          width: "80%",
-          height: "70%",
-        }}
-      >
-        <thead>
-          <tr>
-            <th style={{ border: "1px solid white" }}>日付</th>
-            {users.map((user) => (
-              <th key={user.id} style={{ border: "1px solid white" }}>
-                <a href={`/events/${eventUrlSlug}/users/${user.id}/edit`}>
-                  {user.name}
-                </a>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {schedules.map((schedule) => {
-            const scheduleId = schedule.id;
-            const oCount = countLabels(scheduleId, "O");
-            const ΔCount = countLabels(scheduleId, "△");
-            const xCount = countLabels(scheduleId, "X");
+    <div className="container mx-auto px-4 py-8">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
+      <div className="overflow-x-auto">
+        <table className="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th className="bg-gray-100 text-left">日付</th>
+              {users.map((user) => (
+                <th key={user.id} className="bg-gray-100 text-center">
+                  <a
+                    href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
+                    className="text-blue-600 hover:text-blue-800"
+                  >
+                    {user.name}
+                  </a>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {schedules.map((schedule) => {
+              const scheduleId = schedule.id;
+              const oCount = countLabels(scheduleId, "O");
+              const ΔCount = countLabels(scheduleId, "△");
+              const xCount = countLabels(scheduleId, "X");
 
-            return (
-              schedule.date && ( // 日付ない場合欄を表示しない
-              <tr key={schedule.id}>
-                <td style={{ border: "1px solid white" }}>
-                  {schedule.date} ( {oCount} O | {ΔCount} △ | {xCount} X )
-                </td>
-                {users.map((user) => {
-                  const userId = user.id;
-                  const selectedLabel = selections[scheduleId]?.[userId] || "";
-
-                  return (
-                    <td key={user.id} style={{ border: "1px solid white" }}>
-                      {["O", "△", "X"].map((label) => (
-                        <ScheduleCell
-                          key={label}
-                          label={label}
-                          isSelected={selectedLabel === label}
-                          onClick={() =>
-                            handleCellClick(userId, scheduleId, label)
-                          }
-                        />
-                      ))}
+              return (
+                schedule.date && (
+                  <tr key={schedule.id}>
+                    <td className="font-medium">
+                      {schedule.date}
+                      <div className="text-sm text-gray-500">
+                        ( {oCount} O | {ΔCount} △ | {xCount} X )
+                      </div>
                     </td>
-                  );
-                })}
-              </tr>
-              )
-            );
-          })}
-        </tbody>
-      </table>
+                    {users.map((user) => {
+                      const userId = user.id;
+                      const selectedLabel = selections[scheduleId]?.[userId] || "";
+
+                      return (
+                        <td key={user.id} className="text-center">
+                          <div className="flex justify-center space-x-1">
+                            {["O", "△", "X"].map((label) => (
+                              <ScheduleCell
+                                key={label}
+                                label={label}
+                                isSelected={selectedLabel === label}
+                                onClick={() =>
+                                  handleCellClick(userId, scheduleId, label)
+                                }
+                              />
+                            ))}
+                          </div>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                )
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
