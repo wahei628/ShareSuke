@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ScheduleCell from "./ScheduleCell";
 import axios from "axios";
+import { FaRegCircle } from 'react-icons/fa';
+import { RxCross1 } from 'react-icons/rx';
+import { IoTriangle } from "react-icons/io5";
+import { FaCircle } from "react-icons/fa";
+import { BsTriangle } from "react-icons/bs";
 
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const [selections, setSelections] = useState({});
@@ -64,6 +69,24 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
     ).length;
   };
 
+  const StatusBadge = ({ icon: Icon, count, iconColor, textColor, borderColor }) => (
+    <div className={`relative inline-flex items-center justify-center w-6 h-6 mr-4 rounded-lg ${iconColor}`}>
+      <Icon className="w-6 h-6 absolute" />
+      <span 
+        className={`relative z-10 text-lg font-bold ${textColor}`}
+        style={{
+          textShadow: `
+            -2px -2px 0 ${borderColor},
+            2px -2px 0 ${borderColor},
+            -2px 2px 0 ${borderColor},
+            2px 2px 0 ${borderColor}
+          `
+        }}
+      >{count}</span>
+    </div>
+  );
+
+  
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
@@ -96,8 +119,10 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                   <tr key={schedule.id}>
                     <td className="font-medium">
                       {schedule.date}
-                      <div className="text-sm text-gray-500">
-                        ( {oCount} O | {ΔCount} △ | {xCount} X )
+                      <div className="flex items-center mt-1">
+                        <StatusBadge icon={FaRegCircle} count={oCount} iconColor="bg-green-100 text-green-300" textColor="text-green-800" borderColor="#fff" />
+                        <StatusBadge icon={BsTriangle } count={ΔCount} iconColor="bg-yellow-100 text-yellow-500" textColor="text-yellow-800" borderColor="#fff" />
+                        <StatusBadge icon={RxCross1} count={xCount} iconColor="bg-red-100 text-red-600" textColor=" text-red-700" borderColor="#fff" />
                       </div>
                     </td>
                     {users.map((user) => {
