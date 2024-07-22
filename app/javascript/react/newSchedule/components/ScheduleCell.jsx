@@ -1,12 +1,6 @@
 import React from 'react';
-import { FaRegCircle } from "react-icons/fa6";
 import { RxCross1 } from 'react-icons/rx';
 import { BsTriangle } from "react-icons/bs";
-import { MdOutlineCircle } from "react-icons/md";
-// import { FiCircle } from "react-icons/fi";
-// import { LuCircle } from "react-icons/lu";
-import { RiCheckboxBlankCircleLine } from "react-icons/ri";
-// import { TbCircle } from "react-icons/tb";
 import { RiCircleLine } from "react-icons/ri";
 
 const ScheduleCell = ({ label, isSelected, onClick }) => {

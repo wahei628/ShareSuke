@@ -3,8 +3,6 @@ import ScheduleCell from "./ScheduleCell";
 import axios from "axios";
 import { FaRegCircle } from 'react-icons/fa';
 import { RxCross1 } from 'react-icons/rx';
-import { IoTriangle } from "react-icons/io5";
-import { FaCircle } from "react-icons/fa";
 import { BsTriangle } from "react-icons/bs";
 
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
@@ -120,9 +118,9 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                     <td className="font-medium">
                       {schedule.date}
                       <div className="flex items-center mt-1">
-                        <StatusBadge icon={FaRegCircle} count={oCount} iconColor="bg-green-100 text-green-200" textColor="text-green-800" borderColor="#fff" />
-                        <StatusBadge icon={BsTriangle } count={ΔCount} iconColor="bg-yellow-100 text-yellow-300" textColor="text-yellow-800" borderColor="#fff" />
-                        <StatusBadge icon={RxCross1} count={xCount} iconColor="bg-red-100 text-red-300" textColor=" text-red-700" borderColor="#fff" />
+                        <StatusBadge icon={FaRegCircle} count={oCount} iconColor="bg-green-100 text-green-300" textColor="text-green-800" borderColor="#fff" />
+                        <StatusBadge icon={BsTriangle } count={ΔCount} iconColor="bg-yellow-100 text-yellow-500" textColor="text-yellow-800" borderColor="#fff" />
+                        <StatusBadge icon={RxCross1} count={xCount} iconColor="bg-red-100 text-red-600" textColor=" text-red-700" borderColor="#fff" />
                       </div>
                     </td>
                     {users.map((user) => {
