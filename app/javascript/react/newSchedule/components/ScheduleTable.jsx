@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import ScheduleCell from "./ScheduleCell";
-import axios from "axios"; // http通信を行えるjavacriptライブラリ
+import axios from "axios";
+import { FaRegCircle } from 'react-icons/fa';
+import { RxCross1 } from 'react-icons/rx';
+import { BsTriangle } from "react-icons/bs";
 
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const [selections, setSelections] = useState({});
 
-  // 初期化時に選択状態を取得
   useEffect(() => {
     axios
       .get("/user_schedules") // スケジュールデータ取得のgetリクエスト送信
       .then((response) => {
-        // 成功時の挙動
         const data = response.data;
         const newSelections = {};
 
@@ -27,7 +28,6 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         setSelections(newSelections);
       })
       .catch((error) => {
-        // エラー時の挙動
         console.error("Error fetching data:", error);
       });
   }, []);
@@ -44,7 +44,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
     // ステータスの文字を数値に変換
     const statusMap = { O: 1, X: 2, "△": 3 };
     const status = statusMap[label];
-
+    
     // APIにリクエストを送信
     axios
       .post("/user_schedules", {
@@ -69,67 +69,91 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
     ).length;
   };
 
-  return (
-    <div>
-      <h2>Schedules</h2>
-      <table
+  // ステータスのまとめ
+  const StatusBadge = ({ icon: Icon, count, iconColor, textColor, borderColor }) => (
+    <div className={`relative inline-flex items-center justify-center w-6 h-6 mr-4 rounded-lg ${iconColor}`}>
+      <Icon className="w-6 h-6 absolute" />
+      <span 
+        className={`relative z-10 text-lg font-bold ${textColor}`}
         style={{
-          border: "1px solid white",
-          borderCollapse: "collapse",
-          width: "80%",
-          height: "70%",
+          textShadow: `
+            -1px -1px 0 ${borderColor},
+            1px -1px 0 ${borderColor},
+            -1px 1px 0 ${borderColor},
+            1px 1px 0 ${borderColor}
+          `
         }}
-      >
-        <thead>
-          <tr>
-            <th style={{ border: "1px solid white" }}>日付</th>
-            {users.map((user) => (
-              <th key={user.id} style={{ border: "1px solid white" }}>
-                <a href={`/events/${eventUrlSlug}/users/${user.id}/edit`}>
-                  {user.name}
-                </a>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {schedules.map((schedule) => {
-            const scheduleId = schedule.id;
-            const oCount = countLabels(scheduleId, "O");
-            const ΔCount = countLabels(scheduleId, "△");
-            const xCount = countLabels(scheduleId, "X");
+      >{count}</span>
+    </div>
+  );
 
-            return (
-              schedule.date && ( // 日付ない場合欄を表示しない
-              <tr key={schedule.id}>
-                <td style={{ border: "1px solid white" }}>
-                  {schedule.date} ( {oCount} O | {ΔCount} △ | {xCount} X )
-                </td>
-                {users.map((user) => {
-                  const userId = user.id;
-                  const selectedLabel = selections[scheduleId]?.[userId] || "";
+  
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
+      <div className="overflow-x-auto">
+        <table className="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th className="bg-gray-100 text-left">日付</th>
+              {users.map((user) => (
+                <th key={user.id} className="bg-gray-100 text-center">
+                  <a
+                    href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
+                    className="text-blue-600 hover:text-blue-800"
+                  >
+                    {user.name}
+                  </a>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {schedules.map((schedule) => {
+              const scheduleId = schedule.id;
+              const oCount = countLabels(scheduleId, "O");
+              const ΔCount = countLabels(scheduleId, "△");
+              const xCount = countLabels(scheduleId, "X");
 
-                  return (
-                    <td key={user.id} style={{ border: "1px solid white" }}>
-                      {["O", "△", "X"].map((label) => (
-                        <ScheduleCell
-                          key={label}
-                          label={label}
-                          isSelected={selectedLabel === label}
-                          onClick={() =>
-                            handleCellClick(userId, scheduleId, label)
-                          }
-                        />
-                      ))}
+              return (
+                schedule.date && (
+                  <tr key={schedule.id}>
+                    <td className="font-medium">
+                      {schedule.date}
+                      <div className="flex items-center mt-1">
+                        <StatusBadge icon={FaRegCircle} count={oCount} iconColor="bg-green-100 text-green-300" textColor="text-green-800" borderColor="#fff" />
+                        <StatusBadge icon={BsTriangle } count={ΔCount} iconColor="bg-yellow-100 text-yellow-500" textColor="text-yellow-800" borderColor="#fff" />
+                        <StatusBadge icon={RxCross1} count={xCount} iconColor="bg-red-100 text-red-600" textColor=" text-red-700" borderColor="#fff" />
+                      </div>
                     </td>
-                  );
-                })}
-              </tr>
-              )
-            );
-          })}
-        </tbody>
-      </table>
+                    {users.map((user) => {
+                      const userId = user.id;
+                      const selectedLabel = selections[scheduleId]?.[userId] || "";
+
+                      return (
+                        <td key={user.id} className="text-center">
+                          <div className="flex justify-center space-x-1">
+                            {["O", "△", "X"].map((label) => (
+                              <ScheduleCell
+                                key={label}
+                                label={label}
+                                isSelected={selectedLabel === label}
+                                onClick={() =>
+                                  handleCellClick(userId, scheduleId, label)
+                                }
+                              />
+                            ))}
+                          </div>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                )
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
