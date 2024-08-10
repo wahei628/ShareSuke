@@ -30,9 +30,10 @@ class EventsController < ApplicationController
       dates.each do |date|
         @event.schedules.create(date: date)
       end
-      redirect_to url_share_event_path(@event.url_slug), notice: "Event was successfully created."
+      redirect_to url_share_event_path(@event.url_slug), notice: "イベント作成が成功しました"
     else
-      render :new, status: :unprocessable_entity
+      flash.now[:alert] = "イベント作成が失敗しました"
+      render :new
     end
   end
 

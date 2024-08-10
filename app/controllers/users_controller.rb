@@ -3,9 +3,9 @@ class UsersController < ApplicationController
     @event = Event.find_by(url_slug: params[:event_url_slug])
     @user = @event.users.build(user_params)
     if @user.save
-      redirect_to event_user_path(@event, @user), notice: "User was successfully created."
+      redirect_to event_user_path(@event, @user), notice: "ユーザーが登録されました"
     else
-      redirect_to event_path(@event), alert: "There was an error creating the user."
+      redirect_to event_path(@event), alert: "ユーザーの登録に失敗しました"
     end
   end
 
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @event = Event.find_by(url_slug: params[:event_url_slug])
     @user = @event.users.find(params[:id])
     if @user.update(user_params)
-      redirect_to event_path(@event), notice: "User was successfully updated."
+      redirect_to event_path(@event),  notice: "ユーザー名が更新されました"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @event = Event.find_by(url_slug: params[:event_url_slug])
     @user = @event.users.find(params[:id])
     @user.destroy
-    redirect_to event_path(@event), notice: "User was successfully deleted."
+    redirect_to event_path(@event), notice: "ユーザー削除が成功しました。"
   end
 
   private
