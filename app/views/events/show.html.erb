@@ -4,7 +4,7 @@
 
 <div>
   <div class="mx-auto px-4 py-8 w-11/12 border pb-10">
-    <h2 class="text-2xl" >新規登録</h2>
+    <h2 class="text-2xl mb-4" >ユーザー登録</h2>
     <%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
       <%= hidden_field_tag :event_url_slug, @event.url_slug %>
       <div class="flex items-center">
