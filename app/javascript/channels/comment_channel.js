@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.notice || data.alert || data.danger) {
         const flashContainer = document.getElementById('flash-messages-container');
         const flashMessage = document.createElement('div');
-        flashMessage.className = 'flash-message pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-neutral-200 shadow-lg ring-2 ring-orange-500 transition transform ease-out';
+        flashMessage.className = 'flash-message pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-[#FFFCF2] shadow-lg ring-2 ring-orange-500 transition transform ease-out';
         flashMessage.innerHTML = `
           <div class="p-4">
             <div class="flex items-center">

@@ -92,12 +92,12 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
       <div className="overflow-x-auto">
-        <table className="table table-zebra w-full">
+        <table className="table table-zebra w-full border border-gray-300">
           <thead>
             <tr>
-              <th className="bg-gray-100 text-left">日付</th>
+              <th className="bg-gray-100 text-left border border-gray-300">日付</th>
               {users.map((user) => (
-                <th key={user.id} className="bg-gray-100 text-center">
+                <th key={user.id} className="bg-gray-100 text-center border border-gray-300">
                   <a
                     href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
                     className="text-blue-600 hover:text-blue-800"
@@ -118,7 +118,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
               return (
                 schedule.date && (
                   <tr key={schedule.id}>
-                    <td className="font-medium">
+                    <td className="font-medium border border-gray-300">
                       {schedule.date}
                       <div className="flex items-center mt-1">
                         <StatusBadge icon={FaRegCircle} count={oCount} iconColor="bg-green-100 text-green-300" textColor="text-green-800" borderColor="#fff" />
@@ -131,7 +131,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                       const selectedLabel = selections[scheduleId]?.[userId] || "";
 
                       return (
-                        <td key={user.id} className="text-center">
+                        <td key={user.id} className="text-center border border-gray-300">
                           <div className="flex justify-center space-x-1">
                             {["O", "△", "X"].map((label) => (
                               <ScheduleCell

@@ -8,7 +8,7 @@
 <p>-----------------------------------</p>
 <h3>コメントをする（ユーザー名をクリック後コメントを投稿）</h3>
 <% @event.users.each do |user| %>
-  <button type="button" class="btn-xs select-user btn btn-primary" data-user-id="<%= user.id %>" data-user-name="<%= user.name %>"><%= user.name %></button><br>
+  <button type="button" class="btn-xs select-user btn bg-[#5353DA] hover:bg-[#4141B5] text-white" data-user-id="<%= user.id %>" data-user-name="<%= user.name %>"><%= user.name %></button><br>
 <% end %>
 
 <div class="tooltip tooltip-open tooltip-right hidden mb-2" id="user_selected_tooltip"></div>
@@ -16,11 +16,10 @@
 <%= form_with(model: Comment.new, url: event_comments_path(@event), local: true, id: 'comment_form') do |form| %>
   <%= hidden_field_tag :user_id, nil, id: 'user_id_field' %>
   <div>
-    <%= form.text_area :body %>
+    <%= form.text_area :body, class: "bg-gray-100 text-black border border-gray-300 rounded p-2 w-1/3" %>
   </div>
   <div>
-    <button class="btn btn-xs btn-success flex-grow-0 flex-shrink-0">コメント投稿</button>
-  </div>
+    <button class="btn btn-xs bg-[#5353DA] hover:bg-[#4141B5] text-white flex-grow-0 flex-shrink-0">コメント投稿</button>
 <% end %>
 <p>-----------------------------------</p>
 
