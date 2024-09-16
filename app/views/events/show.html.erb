@@ -1,31 +1,33 @@
-<%= @event.title %>
-<br/>
-<%= @event.description %>
-<br/>
-<%= @event.url_slug %>
-<br/>
-<% @event.schedules.each do |schedule| %>
-  <%= schedule.date %>
+<div class="container px-5">
+  <%= @event.title %>
   <br/>
-<% end %>
+  <%= @event.description %>
+  <br/>
+  <%= @event.url_slug %>
+  <br/>
+  <% @event.schedules.each do |schedule| %>
+    <%= schedule.date %>
+    <br/>
+  <% end %>
 
-<%= render 'events/schedule_table' %>
+  <%= render 'events/schedule_table' %>
 
-<h2>新規登録</h2>
-<%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
-  <%= hidden_field_tag :event_url_slug, @event.url_slug %>
-  <div>
-    <%= form.label :name, "名前" %>
-    <%= form.text_field :name %>
-  </div>
-  <div>
-    <%= form.submit "新規追加する" %>
-  </div>
-<% end %>
+  <h2>新規登録</h2>
+  <%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
+    <%= hidden_field_tag :event_url_slug, @event.url_slug %>
+    <div>
+      <%= form.label :name, "名前" %>
+      <%= form.text_field :name, class: "bg-gray-100 text-black border border-gray-300 rounded" %>
+    </div>
+    <div>
+      <%= form.submit "新規登録", class: "bg-[#5353DA] hover:bg-[#4141B5] text-white font-bold py-1 px-2 rounded-lg mt-2 cursor-pointer" %>
+    </div>
+  <% end %>
 
-<%= render 'events/comment_area' %>
-
-
+  <%= render 'events/comment_area' %>
 
 
-<p class="text-blue-600"><%= link_to "本当はないけど一覧ページに戻る", events_path %></p>
+
+
+  <p class="text-blue-600"><%= link_to "本当はないけど一覧ページに戻る", events_path %></p>
+</div>

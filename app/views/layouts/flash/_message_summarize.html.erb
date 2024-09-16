@@ -1,24 +1,24 @@
-<div class="flash-message pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-neutral-200 shadow-lg ring-2 ring-orange-500 transition transform ease-out">
+<div class="flash-message pointer-events-auto w-full max-w-sm overflow-hidden rounded-lg bg-[#FFFCF2] shadow-lg ring-2 ring-[#FC7400] transition transform ease-out">
   <div class="p-4">
     <div class="flex items-center">
       <% if flash[:notice] %>
         <div class="ml-3 flex-1 pt-0.5">
-          <p class="text-sm font-bold text-green-800 truncate"><%= flash[:notice] %></p>
+          <p class="text-sm font-bold text-green-500 truncate"><%= flash[:notice] %></p>
         </div>
       <% end %>
       <% if flash[:alert] %>
         <div class="ml-3 flex-1 pt-0.5">
-          <p class="text-sm font-bold text-red-800 truncate"><%= flash[:alert] %></p>
+          <p class="text-sm font-bold text-red-500 truncate"><%= flash[:alert] %></p>
         </div>
       <% end %>
       <% if flash[:danger] %>
         <div class="ml-3 flex-1 pt-0.5">
-          <p class="text-sm font-bold text-red-800 truncate"><%= flash[:danger] %></p>
+          <p class="text-sm font-bold text-red-500 truncate"><%= flash[:danger] %></p>
         </div>
       <% end %>
       <% if flash[:success] %>
         <div class="ml-3 flex-1 pt-0.5">
-          <p class="text-sm font-bold text-green-800 truncate"><%= flash[:success] %></p>
+          <p class="text-sm font-bold text-green-500 truncate"><%= flash[:success] %></p>
         </div>
       <% end %>
       <div class="ml-4 flex flex-shrink-0 items-center">
