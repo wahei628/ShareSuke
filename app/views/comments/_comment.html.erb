@@ -1,1 +1,7 @@
-<p>(<%= comment.user.name %>) <%= comment.body %> [<%= comment.created_at.strftime('%-m/%-d %H:%M') %>]</p>
+<div class="chat chat-start">
+  <div class="chat-header">
+    <%= comment.user.name %>
+    <time class="text-xs opacity-50"> <%= comment.created_at.strftime('%-m/%-d %H:%M') %> </time>
+  </div>
+  <div class="chat-bubble"> <%= comment.body %> </div>
+</div>

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ScheduleCell from "./ScheduleCell";
 import axios from "axios";
-import { FaRegCircle } from 'react-icons/fa';
-import { RxCross1 } from 'react-icons/rx';
+import { FaRegCircle } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
 import { BsTriangle } from "react-icons/bs";
 
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
@@ -44,7 +44,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
     // ステータスの文字を数値に変換
     const statusMap = { O: 1, X: 2, "△": 3 };
     const status = statusMap[label];
-    
+
     // APIにリクエストを送信
     axios
       .post("/user_schedules", {
@@ -70,10 +70,18 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   };
 
   // ステータスのまとめ
-  const StatusBadge = ({ icon: Icon, count, iconColor, textColor, borderColor }) => (
-    <div className={`relative inline-flex items-center justify-center w-6 h-6 mr-4 rounded-lg ${iconColor}`}>
+  const StatusBadge = ({
+    icon: Icon,
+    count,
+    iconColor,
+    textColor,
+    borderColor,
+  }) => (
+    <div
+      className={`relative inline-flex items-center justify-center w-6 h-6 mr-4 rounded-lg ${iconColor}`}
+    >
       <Icon className="w-6 h-6 absolute" />
-      <span 
+      <span
         className={`relative z-10 text-lg font-bold ${textColor}`}
         style={{
           textShadow: `
@@ -81,13 +89,14 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
             1px -1px 0 ${borderColor},
             -1px 1px 0 ${borderColor},
             1px 1px 0 ${borderColor}
-          `
+          `,
         }}
-      >{count}</span>
+      >
+        {count}
+      </span>
     </div>
   );
 
-  
   return (
     <div className="container mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
@@ -95,9 +104,14 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         <table className="table table-zebra w-full border border-gray-300">
           <thead>
             <tr>
-              <th className="bg-gray-100 text-left border border-gray-300">日付</th>
+              <th className="bg-gray-100 text-left border border-gray-300 w-32">
+                日付
+              </th>
               {users.map((user) => (
-                <th key={user.id} className="bg-gray-100 text-center border border-gray-300">
+                <th
+                  key={user.id}
+                  className="bg-gray-100 text-center border border-gray-300 whitespace-normal"
+                >
                   <a
                     href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
                     className="text-blue-600 hover:text-blue-800"
@@ -120,18 +134,40 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                   <tr key={schedule.id}>
                     <td className="font-medium border border-gray-300">
                       {schedule.date}
-                      <div className="flex items-center mt-1">
-                        <StatusBadge icon={FaRegCircle} count={oCount} iconColor="bg-green-100 text-green-300" textColor="text-green-800" borderColor="#fff" />
-                        <StatusBadge icon={BsTriangle } count={ΔCount} iconColor="bg-yellow-100 text-yellow-500" textColor="text-yellow-800" borderColor="#fff" />
-                        <StatusBadge icon={RxCross1} count={xCount} iconColor="bg-red-100 text-red-600" textColor=" text-red-700" borderColor="#fff" />
+                      <div className="flex mt-1 max-w-20">
+                        <StatusBadge
+                          icon={FaRegCircle}
+                          count={oCount}
+                          iconColor="bg-green-100 text-green-300"
+                          textColor="text-green-800"
+                          borderColor="#fff"
+                        />
+                        <StatusBadge
+                          icon={BsTriangle}
+                          count={ΔCount}
+                          iconColor="bg-yellow-100 text-yellow-500"
+                          textColor="text-yellow-800"
+                          borderColor="#fff"
+                        />
+                        <StatusBadge
+                          icon={RxCross1}
+                          count={xCount}
+                          iconColor="bg-red-100 text-red-600"
+                          textColor=" text-red-700"
+                          borderColor="#fff"
+                        />
                       </div>
                     </td>
                     {users.map((user) => {
                       const userId = user.id;
-                      const selectedLabel = selections[scheduleId]?.[userId] || "";
+                      const selectedLabel =
+                        selections[scheduleId]?.[userId] || "";
 
                       return (
-                        <td key={user.id} className="text-center border border-gray-300">
+                        <td
+                          key={user.id}
+                          className="text-center border border-gray-300"
+                        >
                           <div className="flex justify-center space-x-1">
                             {["O", "△", "X"].map((label) => (
                               <ScheduleCell

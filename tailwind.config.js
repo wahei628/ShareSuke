@@ -1,9 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './app/**/*.{html,erb,rb,js,jsx,ts,tsx}',
-    './config/initializers/**/*.rb',
-    './lib/components/**/*.{rb,erb}',
+    "./app/**/*.{html,erb,rb,js,jsx,ts,tsx}",
+    "./config/initializers/**/*.rb",
+    "./lib/components/**/*.{rb,erb}",
   ],
   theme: {
     extend: {},
@@ -11,5 +11,5 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
     darkTheme: "none",
-  }
-}
+  },
+};
