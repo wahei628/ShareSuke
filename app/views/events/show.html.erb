@@ -1,19 +1,21 @@
 <%= render 'events/schedule_table' %>
 
-<div class="mx-auto px-4 py-8 w-11/12 border">
-  <h2 class="text-2xl" >新規登録</h2>
-  <%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
-    <%= hidden_field_tag :event_url_slug, @event.url_slug %>
-    <div class="flex items-center">
-      <div class="mx-1">
-        <%= form.label :name, "名前" %>
-        <%= form.text_field :name, class: "text-black border border-gray-300 rounded" %>
+<div>
+  <div class="mx-auto px-4 py-8 w-11/12 border pb-10">
+    <h2 class="text-2xl" >新規登録</h2>
+    <%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
+      <%= hidden_field_tag :event_url_slug, @event.url_slug %>
+      <div class="flex items-center">
+        <div class="mx-1">
+          <%= form.label :name, "名前" %>
+          <%= form.text_field :name, class: "text-black border border-gray-300 rounded" %>
+        </div>
+        <div class="mx-1">
+          <%= form.submit "新規登録", class: "bg-[#FC7400] hover:bg-[#FF9500] text-white font-bold py-1 px-2 rounded-lg cursor-pointer" %>
+        </div>
       </div>
-      <div class="mx-1">
-        <%= form.submit "新規登録", class: "bg-[#FC7400] hover:bg-[#FF9500] text-white font-bold py-1 px-2 rounded-lg cursor-pointer" %>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
 
-  <%= render 'events/comment_area' %>
+    <%= render 'events/comment_area' %>
+  </div>
 </div>
