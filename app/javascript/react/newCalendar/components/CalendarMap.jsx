@@ -4,10 +4,6 @@ import { formatDate, getAdjustedDate, isToday } from '../utils/dateUtil';
 
 
 const CalendarMap = ({ currentYear, currentMonth, calendarDays, selectedDates, setSelectedDates }) => {
-
-  useEffect(() => {
-    console.log('Selected dates:', selectedDates);
-  }, [selectedDates]);
   
   const handleDateSelection = (day) => {
     toggleDateSelection(day, currentYear, currentMonth, setSelectedDates);

@@ -62,17 +62,11 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         },
       })
       .then((response) => {
-        console.log("Success:", response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
       });
   };
-
-  useEffect(() => {
-    console.log(activeTab)
-  },
-  [activeTab])
 
   const countLabels = (scheduleId, label) => {
     if (!selections[scheduleId]) return 0;
