@@ -14,12 +14,12 @@
       <div class="flex items-center justify-center space-x-2">
         <a href="#" class="hover:underline">よくある質問</a>
         <span>|</span>
-        <a href="#" class="hover:underline">お問い合わせ</a>
+        <a href="https://x.com/kazu16885450" class="hover:underline" target="_blank">お問い合わせ</a>
       </div>
       <div class="flex items-center justify-center space-x-2">
-        <a href="#" class="hover:underline">利用規約</a>
+        <%= link_to '利用規約', terms_path, class: "hover:underline" %>
         <span>|</span>
-        <a href="#" class="hover:underline">プライバシーポリシー</a>
+        <%= link_to 'プライバシーポリシー', privacy_path, class: "hover:underline" %>
       </div>
     </div>
     <p class="text-sm">
