@@ -11,7 +11,7 @@ const ScheduleCell = ({ label, isSelected, onClick }) => {
     "△": isSelected ? "bg-yellow-400 text-yellow-700 border border-yellow-500" : "text-yellow-500 border border-yellow-300 hover:bg-yellow-200",
     "X": isSelected ? "bg-red-500 text-white border border-red-700" : "text-red-600 border border-red-200 hover:bg-red-200",
   };
-
+  
 
   const getIcon = () => {
     const iconStyle = {

@@ -1,8 +1,8 @@
+// main.jsx
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { CalendarForm } from './newCalendar/components/CalendarForm';
 import ScheduleTable from "./newSchedule/components/ScheduleTable";
-
 
 document.addEventListener("turbo:load", () => {
   const CalendarRoot = document.getElementById("react-calendar-form");
@@ -17,12 +17,13 @@ document.addEventListener("turbo:load", () => {
     const eventUrlSlug = node.getAttribute("data-event-url-slug");
 
     createRoot(node).render(
-      <ScheduleTable
-        users={users}
-        schedules={schedules}
-        eventUrlSlug={eventUrlSlug}
-      />
+      <div className="w-full md:w-2/3 mx-auto">
+        <ScheduleTable
+          users={users}
+          schedules={schedules}
+          eventUrlSlug={eventUrlSlug}
+        />
+      </div>
     );
   }
 });
-

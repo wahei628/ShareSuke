@@ -7,10 +7,11 @@ import { BsTriangle } from "react-icons/bs";
 
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const [selections, setSelections] = useState({});
+  const cellStyle = `w-32 h-20`
 
   useEffect(() => {
     axios
-      .get("/user_schedules") // スケジュールデータ取得のgetリクエスト送信
+      .get("/user_schedules")
       .then((response) => {
         const data = response.data;
         const newSelections = {};
@@ -20,7 +21,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
             newSelections[item.schedule_id] = {};
           }
 
-          const statusMap = { 1: "O", 2: "X", 3: "△" }; // ステータスの数値を文字に変換
+          const statusMap = { 1: "O", 2: "X", 3: "△" };
           newSelections[item.schedule_id][item.user_id] =
             statusMap[item.status];
         });
@@ -41,11 +42,9 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
       },
     }));
 
-    // ステータスの文字を数値に変換
     const statusMap = { O: 1, X: 2, "△": 3 };
     const status = statusMap[label];
 
-    // APIにリクエストを送信
     axios
       .post("/user_schedules", {
         user_schedule: {
@@ -69,7 +68,6 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
     ).length;
   };
 
-  // ステータスのまとめ
   const StatusBadge = ({
     icon: Icon,
     count,
@@ -98,99 +96,101 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   );
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
-      <div className="overflow-x-auto">
-        <table className="table table-zebra w-full border border-gray-300">
-          <thead>
-            <tr>
-              <th className="bg-gray-100 text-left border border-gray-300 w-32">
+      <div className="w-full overflow-x-auto">
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
+        <div className="inline-block min-w-full">
+          <div className="grid grid-flow-col auto-cols-min">
+            {/* 固定列（日付） */}
+            <div className="sticky left-0 bg-white z-10">
+              <div className={`bg-gray-100 text-left border border-gray-300 p-2 font-bold w-32`}>
                 日付
-              </th>
-              {users.map((user) => (
-                <th
-                  key={user.id}
-                  className="bg-gray-100 text-center border border-gray-300 whitespace-normal"
+              </div>
+          {schedules.map((schedule) => {
+            const scheduleId = schedule.id;
+            const oCount = countLabels(scheduleId, "O");
+            const ΔCount = countLabels(scheduleId, "△");
+            const xCount = countLabels(scheduleId, "X");
+
+            return (
+              schedule.date && (
+                <div
+                  key={schedule.id}
+                  className={`font-medium border border-gray-300 ${cellStyle} p-2`}
                 >
-                  <a
-                    href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
-                    className="text-blue-600 hover:text-blue-800"
-                  >
-                    {user.name}
-                  </a>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
+                  {schedule.date}
+                  <div className={`flex mt-1 max-w-20 ${cellStyle}`}>
+                    <StatusBadge
+                      icon={FaRegCircle}
+                      count={oCount}
+                      iconColor="bg-green-100 text-green-300"
+                      textColor="text-green-800"
+                      borderColor="#fff"
+                    />
+                    <StatusBadge
+                      icon={BsTriangle}
+                      count={ΔCount}
+                      iconColor="bg-yellow-100 text-yellow-500"
+                      textColor="text-yellow-800"
+                      borderColor="#fff"
+                    />
+                    <StatusBadge
+                      icon={RxCross1}
+                      count={xCount}
+                      iconColor="bg-red-100 text-red-600"
+                      textColor=" text-red-700"
+                      borderColor="#fff"
+                    />
+                  </div>
+                </div>
+              )
+            );
+          })}
+        </div>
+
+        {/* ユーザー列 */}
+        {users.map((user) => (
+          <div key={user.id} className={`${cellStyle}`}>
+            <div className="bg-gray-100 text-center border border-gray-300 p-2 whitespace-normal">
+              <a
+                href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
+                className="text-blue-600 hover:text-blue-800 h-20"
+              >
+                {user.name}
+              </a>
+            </div>
             {schedules.map((schedule) => {
               const scheduleId = schedule.id;
-              const oCount = countLabels(scheduleId, "O");
-              const ΔCount = countLabels(scheduleId, "△");
-              const xCount = countLabels(scheduleId, "X");
+              const userId = user.id;
+              const selectedLabel =
+                selections[scheduleId]?.[userId] || "";
 
               return (
                 schedule.date && (
-                  <tr key={schedule.id}>
-                    <td className="font-medium border border-gray-300">
-                      {schedule.date}
-                      <div className="flex mt-1 max-w-20">
-                        <StatusBadge
-                          icon={FaRegCircle}
-                          count={oCount}
-                          iconColor="bg-green-100 text-green-300"
-                          textColor="text-green-800"
-                          borderColor="#fff"
+                  <div
+                    key={`${user.id}-${schedule.id}`}
+                    className={`text-center border border-gray-300 p-2 ${cellStyle} flex justify-center items-center`}
+                  >
+                    <div className="flex justify-center items-center space-x-1">
+                      {["O", "△", "X"].map((label) => (
+                        <ScheduleCell
+                          key={label}
+                          label={label}
+                          isSelected={selectedLabel === label}
+                          onClick={() =>
+                            handleCellClick(userId, scheduleId, label)
+                          }
                         />
-                        <StatusBadge
-                          icon={BsTriangle}
-                          count={ΔCount}
-                          iconColor="bg-yellow-100 text-yellow-500"
-                          textColor="text-yellow-800"
-                          borderColor="#fff"
-                        />
-                        <StatusBadge
-                          icon={RxCross1}
-                          count={xCount}
-                          iconColor="bg-red-100 text-red-600"
-                          textColor=" text-red-700"
-                          borderColor="#fff"
-                        />
-                      </div>
-                    </td>
-                    {users.map((user) => {
-                      const userId = user.id;
-                      const selectedLabel =
-                        selections[scheduleId]?.[userId] || "";
-
-                      return (
-                        <td
-                          key={user.id}
-                          className="text-center border border-gray-300"
-                        >
-                          <div className="flex justify-center space-x-1">
-                            {["O", "△", "X"].map((label) => (
-                              <ScheduleCell
-                                key={label}
-                                label={label}
-                                isSelected={selectedLabel === label}
-                                onClick={() =>
-                                  handleCellClick(userId, scheduleId, label)
-                                }
-                              />
-                            ))}
-                          </div>
-                        </td>
-                      );
-                    })}
-                  </tr>
+                      ))}
+                    </div>
+                  </div>
                 )
               );
             })}
-          </tbody>
-        </table>
+          </div>
+        ))}
       </div>
     </div>
+  </div>
   );
 };
 
