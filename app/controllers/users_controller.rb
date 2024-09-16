@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @event = Event.find_by(url_slug: params[:event_url_slug])
     @user = @event.users.find(params[:id])
     @user.destroy
-    redirect_to event_path(@event), notice: "ユーザー削除が成功しました。"
+    redirect_to event_path(@event), notice: "ユーザー削除が成功しました"
   end
 
   private

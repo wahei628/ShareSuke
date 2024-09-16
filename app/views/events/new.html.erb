@@ -1,27 +1,27 @@
 
-<div class="flex items-center justify-center m-8 p-8 border border-gray-300">
+<div class="flex items-center justify-center m-8 p-8" style="background-color: #f1f2f6;">
   <div class="max-w-md w-full">
     <h1 class="card-title text-center text-2xl mb-6">イベント新規作成</h1>
     <%= form_with model: @event, url: events_path, local: true do |f| %>
       <div class="mb-4">
         <%= f.label :title, "タイトル", class: "block mb-1" %>
-        <%= f.text_field :title, class: "input input-bordered w-full border border-gray-300 p-2" %>
+        <%= f.text_field :title, class: "input input-bordered w-full p-2" %>
       </div>
 
       <div class="mb-4">
         <%= f.label :description, "内容", class: "block mb-1" %>
-        <%= f.text_field :description, class: "input input-bordered w-full border border-gray-300 p-2" %>
+        <%= f.text_field :description, class: "input input-bordered w-full p-2" %>
       </div>
 
       <div class="mb-4">
         <%= f.label :dates, '日付', class: "block mb-1"%>
         <%= f.hidden_field :dates %>          
-        <div id="react-calendar-form" class="border border-gray-300 p-2"></div>
+        <div id="react-calendar-form" class="p-2"></div>
       </div>
 
       <div class="mb-4">
         <%= f.label :password, "合言葉 ※任意", class: "block mb-1" %>
-        <%= f.password_field :password, id: 'password-field', class: "input input-bordered w-full border border-gray-300 p-2" %>
+        <%= f.password_field :password, id: 'password-field', class: "input input-bordered w-full p-2" %>
       </div>
 
       <div class="flex items-center my-3">

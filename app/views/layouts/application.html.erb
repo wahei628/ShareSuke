@@ -18,17 +18,19 @@
 
       gtag('config', 'G-73N436WHW1');
     </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
 
   <body>
     <%= render 'shared/header' %>
       <div id="flash-messages-container" class="fixed inset-x-0 top-16 flex justify-center z-50 mr-10">
-      <%= turbo_frame_tag 'flash', class: "flex w-full flex-col items-center space-y-4 sm:items-end" do %>
-        <% flash.each do |key, massage| %>
-          <%= render "layouts/flash/message_summarize" %>
+        <%= turbo_frame_tag 'flash', class: "flex w-full flex-col items-center space-y-4 sm:items-end" do %>
+          <% flash.each do |key, massage| %>
+            <%= render "layouts/flash/message_summarize" %>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </div>
     <%= yield %>
     <%= render 'shared/footer' %>
   </body>
