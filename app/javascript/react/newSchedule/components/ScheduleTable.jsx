@@ -61,8 +61,6 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
           status: status,
         },
       })
-      .then((response) => {
-      })
       .catch((error) => {
         console.error("Error:", error);
       });
