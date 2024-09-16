@@ -1,14 +1,19 @@
-<header class="navbar bg-customLiteGreen border-b border-slate-300 bg-gray-100"> 
-  <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-customWhite">
-    <div class="flex flex-col items-start mb-4 md:mb-0">
-      <%= link_to 'ShareSuke', '#', class: "btn btn-ghost text-2xl text-[#FC7400]" %>
-      <h1 class="text-sm tracking-wide text-[#FC7400] italic whitespace-nowrap">ShareSuke SHARPENS YOUR SCHEDULES UP</h1>
+<header class="border-b border-slate-300 bg-gray-100"> 
+  <div class=" grid gird-cols-2 gap-5">
+    <div class="col-start-1 col-span-1">
+    <div class="flex pt-4">
+      <%= link_to 'ShareSuke', root_path, class: "btn btn-ghost text-2xl text-[#FC7400]" %>
     </div>
-    <div class="flex-none w-full md:w-auto">
-      <ul class="menu flex flex-col md:flex-row md:space-x-4">
-        <li class="mb-2 md:mb-0"><%= link_to '使い方', '#', class: "btn btn-ghost bg-[#FC7400] hover:bg-[#FF9500] text-white" %></li>
-        <li><%= link_to 'よくある質問', '#', class: "btn btn-ghost bg-[#FC7400] hover:bg-[#FF9500] text-white" %></li>
-      </ul>
     </div>
+    <div class="col-start-2 col-span-1">
+      <div class="flex justify-end items-center pt-4 pr-4">
+      <div class="border rounded-lg border-gray-300">
+        <%= link_to 'イベント作成', new_event_path, class: "btn btn-ghost text-lg text-[#FC7400]" %>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="pl-5">
+    <h1 class="text-sm tracking-wide text-[#FC7400] italic whitespace-nowrap">ShareSuke SHARPENS YOUR SCHEDULES UP</h1>
   </div>
 </header>
