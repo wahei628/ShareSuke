@@ -17,7 +17,7 @@ document.addEventListener("turbo:load", () => {
     const eventUrlSlug = node.getAttribute("data-event-url-slug");
 
     createRoot(node).render(
-      <div className="w-full md:w-2/3 mx-auto">
+      <div className="">
         <ScheduleTable
           users={users}
           schedules={schedules}

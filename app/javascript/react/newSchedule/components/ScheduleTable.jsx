@@ -7,7 +7,8 @@ import { BsTriangle } from "react-icons/bs";
 
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const [selections, setSelections] = useState({});
-  const cellStyle = `w-32 h-20`
+  const cellStyle = `w-32 h-24`
+  const cellDateStyle = `w-24 h-24`
 
   useEffect(() => {
     axios
@@ -96,101 +97,110 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   );
 
   return (
-      <div className="w-full overflow-x-auto">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
-        <div className="inline-block min-w-full">
-          <div className="grid grid-flow-col auto-cols-min">
-            {/* 固定列（日付） */}
-            <div className="sticky left-0 bg-white z-10">
-              <div className={`bg-gray-100 text-left border border-gray-300 p-2 font-bold w-32`}>
-                日付
-              </div>
-          {schedules.map((schedule) => {
-            const scheduleId = schedule.id;
-            const oCount = countLabels(scheduleId, "O");
-            const ΔCount = countLabels(scheduleId, "△");
-            const xCount = countLabels(scheduleId, "X");
-
-            return (
-              schedule.date && (
-                <div
-                  key={schedule.id}
-                  className={`font-medium border border-gray-300 ${cellStyle} p-2`}
-                >
-                  {schedule.date}
-                  <div className={`flex mt-1 max-w-20 ${cellStyle}`}>
-                    <StatusBadge
-                      icon={FaRegCircle}
-                      count={oCount}
-                      iconColor="bg-green-100 text-green-300"
-                      textColor="text-green-800"
-                      borderColor="#fff"
-                    />
-                    <StatusBadge
-                      icon={BsTriangle}
-                      count={ΔCount}
-                      iconColor="bg-yellow-100 text-yellow-500"
-                      textColor="text-yellow-800"
-                      borderColor="#fff"
-                    />
-                    <StatusBadge
-                      icon={RxCross1}
-                      count={xCount}
-                      iconColor="bg-red-100 text-red-600"
-                      textColor=" text-red-700"
-                      borderColor="#fff"
-                    />
-                  </div>
-                </div>
-              )
-            );
-          })}
-        </div>
-
-        {/* ユーザー列 */}
-        {users.map((user) => (
-          <div key={user.id} className={`${cellStyle}`}>
-            <div className="bg-gray-100 text-center border border-gray-300 p-2 whitespace-normal">
-              <a
-                href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
-                className="text-blue-600 hover:text-blue-800 h-20"
-              >
-                {user.name}
-              </a>
-            </div>
-            {schedules.map((schedule) => {
-              const scheduleId = schedule.id;
-              const userId = user.id;
-              const selectedLabel =
-                selections[scheduleId]?.[userId] || "";
-
-              return (
-                schedule.date && (
-                  <div
-                    key={`${user.id}-${schedule.id}`}
-                    className={`text-center border border-gray-300 p-2 ${cellStyle} flex justify-center items-center`}
-                  >
-                    <div className="flex justify-center items-center space-x-1">
-                      {["O", "△", "X"].map((label) => (
-                        <ScheduleCell
-                          key={label}
-                          label={label}
-                          isSelected={selectedLabel === label}
-                          onClick={() =>
-                            handleCellClick(userId, scheduleId, label)
-                          }
-                        />
-                      ))}
+      <>
+      <div className="w-full flex justify-center"> {/* 全幅のコンテナ */}
+        <div className="w-11/12"> {/* 11/12幅のコンテナ */}
+          <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
+          <div className="flex justify-start"> {/* フレックスコンテナ */}
+            <div className="border rounded border-cyan-700 overflow-auto">
+              <div className="inline-block">
+                <div className="grid grid-flow-col auto-cols-min">
+                      {/* 固定列（日付） */}
+                  <div className="sticky left-0 z-30">
+                    <div className={`bg-gray-100 text-left border border-gray-300 p-2 font-bold w-24 sticky top-0 left-0 z-50`}>
+                      日付
                     </div>
+                    
+                    {schedules.map((schedule) => {
+                      // 定義
+                      const scheduleId = schedule.id;
+                      const oCount = countLabels(scheduleId, "O");
+                      const ΔCount = countLabels(scheduleId, "△");
+                      const xCount = countLabels(scheduleId, "X");
+
+                      return (
+                        
+                        schedule.date && (
+                          <div
+                            key={schedule.id}
+                            className={`font-medium border border-gray-300 ${cellDateStyle} p-2 bg-gray-100`}
+                          >
+                            {/* 西暦を表示 */}
+                            {schedule.date.slice(0, 4)}
+                            <br />
+                            {/* 日付を表示 */}
+                            {schedule.date.slice(5)}
+                            <div className={`flex mt-1 max-w-20 ${cellDateStyle}`}>
+                              <StatusBadge
+                                icon={FaRegCircle}
+                                count={oCount}
+                                iconColor="bg-green-100 text-green-300"
+                                textColor="text-green-800"
+                                borderColor="#fff" />
+                              <StatusBadge
+                                icon={BsTriangle}
+                                count={ΔCount}
+                                iconColor="bg-yellow-100 text-yellow-500"
+                                textColor="text-yellow-800"
+                                borderColor="#fff" />
+                              <StatusBadge
+                                icon={RxCross1}
+                                count={xCount}
+                                iconColor="bg-red-100 text-red-600"
+                                textColor=" text-red-700"
+                                borderColor="#fff" />
+                            </div>
+                          </div>
+                        )
+                      );
+                    })}
                   </div>
-                )
-              );
-            })}
+
+                  {/* ユーザー列 */}
+                  {users.map((user) => (
+                  <div key={user.id} className={`${cellStyle}`}>
+                    <div className="bg-gray-100 text-center border border-gray-300 p-2 whitespace-normal sticky top-0 z-10">
+                      <a
+                        href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
+                        className="text-blue-600 hover:text-blue-800 h-20"
+                      >
+                        {user.name}
+                      </a>
+                    </div>
+                    {schedules.map((schedule) => {
+                      const scheduleId = schedule.id;
+                      const userId = user.id;
+                      const selectedLabel = selections[scheduleId]?.[userId] || "";
+
+
+                      return (
+                        schedule.date && (
+                          <div
+                            key={`${user.id}-${schedule.id}`}
+                            className={`text-center border border-gray-300 p-2 ${cellStyle} flex justify-center items-center`}
+                          >
+                            <div className="flex justify-center items-center space-x-1">
+                              {["O", "△", "X"].map((label) => (
+                                <ScheduleCell
+                                  key={label}
+                                  label={label}
+                                  isSelected={selectedLabel === label}
+                                  onClick={() => handleCellClick(userId, scheduleId, label)} />
+                              ))}
+                            </div>
+                          </div>
+                        )
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
-  </div>
+    </>
   );
 };
 
