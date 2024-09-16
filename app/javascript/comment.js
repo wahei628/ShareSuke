@@ -17,7 +17,18 @@ document.addEventListener('turbo:load', function() {
     var userId = document.getElementById('user_id_field').value;
     if (!userId) {
       event.preventDefault();
-      alert('ユーザ名をクリックして選択をしてください');
+      Swal.fire({
+        icon: 'error',
+        title: "ユーザ名が選択されていません",
+        color: "#33333",
+        timer: 1200,
+        timerProgressBar: true,
+        willOpen: (popup) => {
+          popup.style.borderRadius = '15px';
+          const confirmButton = popup.querySelector('.swal2-confirm');
+          confirmButton.style.borderRadius = '10px';
+        }
+      });
     } else {
       // Hide tooltip after comment is submitted
       var tooltip = document.getElementById('user_selected_tooltip');

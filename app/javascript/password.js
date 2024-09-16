@@ -18,7 +18,7 @@ document.addEventListener("turbo:load", () => {
         }, 2000);
       })
       .catch(() => {
-        alert("パスワードのコピーに失敗しました。");
+        alert("パスワードのコピーに失敗しました");
       });
   });
 });

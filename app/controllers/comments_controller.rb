@@ -7,13 +7,13 @@ class CommentsController < ApplicationController
       rendered_comment = render_to_string(partial: 'comments/comment', locals: { comment: @comment })
       ActionCable.server.broadcast "comment_channel_#{@comment.user.event_id}", { 
         comment: rendered_comment,
-        notice: "コメントが正常に作成されました。" 
+        notice: "コメントが正常に作成されました" 
       }
     else
       ActionCable.server.broadcast "comment_channel_#{@comment.user.event_id}", { 
-        alert: "コメントの作成にエラーが発生しました。" 
+        alert: "コメントの作成にエラーが発生しました" 
       }
-      redirect_to event_path(params[:event_url_slug]), alert: "コメントの作成にエラーが発生しました。"
+      redirect_to event_path(params[:event_url_slug]), alert: "コメントの作成にエラーが発生しました"
     end
   end
 

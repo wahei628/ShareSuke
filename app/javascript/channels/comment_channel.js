@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         flashMessage.innerHTML = `
           <div class="p-4">
             <div class="flex items-center">
-              ${data.notice ? `<div class="ml-3 flex-1 pt-0.5"><p class="text-sm font-bold text-green-800 truncate">${data.notice}</p></div>` : ''}
-              ${data.alert ? `<div class="ml-3 flex-1 pt-0.5"><p class="text-sm font-bold text-red-800 truncate">${data.alert}</p></div>` : ''}
-              ${data.danger ? `<div class="ml-3 flex-1 pt-0.5"><p class="text-sm font-bold text-red-800 truncate">${data.danger}</p></div>` : ''}
+              ${data.notice ? `<div class="ml-3 flex-1 pt-0.5"><p class="text-sm font-bold text-green-500 truncate">${data.notice}</p></div>` : ''}
+              ${data.alert ? `<div class="ml-3 flex-1 pt-0.5"><p class="text-sm font-bold text-red-500 truncate">${data.alert}</p></div>` : ''}
+              ${data.danger ? `<div class="ml-3 flex-1 pt-0.5"><p class="text-sm font-bold text-red-500 truncate">${data.danger}</p></div>` : ''}
               <div class="ml-4 flex flex-shrink-0 items-center">
                 <button type="button" class="inline-flex rounded-full bg-orange-100 text-orange-600 hover:text-orange-800 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2" aria-label="Close" onclick="this.parentElement.parentElement.parentElement.remove()">
                   <span class="sr-only">Close</span>
