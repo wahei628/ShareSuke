@@ -3,7 +3,7 @@ import { RxCross1 } from 'react-icons/rx';
 import { BsTriangle } from "react-icons/bs";
 import { RiCircleLine } from "react-icons/ri";
 
-const ScheduleCell = ({ label, isSelected, onClick }) => {
+export const ScheduleCell = ({ label, isSelected, onClick }) => {
   const baseClasses = "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium cursor-pointer transition-colors duration-200";
   
   const colorClasses = {
@@ -42,4 +42,39 @@ const ScheduleCell = ({ label, isSelected, onClick }) => {
   );
 };
 
-export default ScheduleCell;
+export const DisplayScheduleCell = ({ label, isSelected }) => {
+  if (!isSelected) return null;
+
+  const baseClasses = "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors duration-200";
+  
+  const colorClasses = {
+    "O": "bg-green-400 text-white border border-green-700",
+    "△": "bg-yellow-400 text-yellow-700 border border-yellow-500",
+    "X": "bg-red-500 text-white border border-red-700"
+  };
+
+  const getIcon = () => {
+    const iconStyle = {
+      filter: 'url(#bold)',
+      strokeWidth: '1',
+      stroke: 'currentColor',
+    };
+
+    switch (label) {
+      case "O":
+        return <RiCircleLine style={iconStyle} />;
+      case '△':
+        return <BsTriangle style={iconStyle} />;
+      case 'X':
+        return <RxCross1 style={iconStyle} />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className={`${baseClasses} ${colorClasses[label]}`}>
+      {getIcon()}
+    </div>
+  );
+};
