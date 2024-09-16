@@ -24,7 +24,6 @@ document.addEventListener('turbo:load', function() {
         timer: 1200,
         timerProgressBar: true,
         willOpen: (popup) => {
-          const title = popup.querySelector('.swal2-title');
           popup.style.borderRadius = '15px';
           const confirmButton = popup.querySelector('.swal2-confirm');
           confirmButton.style.borderRadius = '10px';
