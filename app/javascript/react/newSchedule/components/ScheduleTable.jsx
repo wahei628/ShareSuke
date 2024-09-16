@@ -102,7 +102,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         <div className="w-11/12"> {/* 11/12幅のコンテナ */}
           <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
           <div className="flex justify-start"> {/* フレックスコンテナ */}
-            <div className="border rounded border-cyan-700 overflow-auto">
+            <div className="border rounded overflow-auto">
               <div className="inline-block">
                 <div className="grid grid-flow-col auto-cols-min">
                       {/* 固定列（日付） */}
