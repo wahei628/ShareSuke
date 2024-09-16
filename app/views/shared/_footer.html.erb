@@ -1,9 +1,9 @@
 <div class="pt-10">
-  <footer class="bg-customLiteGreen text-white bg-gray-200 w-full py-10">
+  <footer class="bg-customLiteGreen text-white w-full py-10" style="background-color: #f8f9fa;">
     <div class="max-w-screen-lg mx-auto text-center text-[#FC7400]">
       <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8 mb-4">
         <div class="flex items-center justify-center space-x-2">
-          <a href="#" class="hover:underline">イベント新規作成</a>
+          <%= link_to 'イベント作成', new_event_path, class:"hover:underline"%>
           <span>|</span>
           <a href="#" class="hover:underline">使い方</a>
         </div>
