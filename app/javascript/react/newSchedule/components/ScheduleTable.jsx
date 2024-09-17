@@ -11,7 +11,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const cellStyle = `w-32 h-24`
   const cellDateStyle = `w-24 h-24`
   const borderClass = "border-2 border-orange-400 text-bold"
-  const tabClass = "px-4 border-t-2 border-x-2 rounded-t-md font-bold focus:outline-none relative";
+  const tabClass = "px-10 border-t-2 border-x-2 rounded-t-md font-bold focus:outline-none relative";
   const activeTabClass = `bg-white ${borderClass} border-b-0 text-green-500 
   after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-[2px] after:bg-white`;
   const inactiveTabClass = "bg-gray-100 text-green-300 border-transparent hover:text-green-500";
@@ -110,7 +110,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
           <div className="flex border-b-2  border-orange-400 mb-4">
             <button
               role="tab"
-              className={`${tabClass} ${activeTab === 'statusDisplay' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg px-10`}
+              className={`${tabClass} ${activeTab === 'statusDisplay' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg`}
               onClick={() => setActiveTab('statusDisplay')}
               aria-selected={activeTab === 'statusDisplay'}
               aria-controls="statusDisplay-panel"
@@ -119,7 +119,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
             </button>
             <button
               role="tab"
-              className={`${tabClass} ${activeTab === 'statusEdit' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg px-10`}
+              className={`${tabClass} ${activeTab === 'statusEdit' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg`}
               onClick={() => setActiveTab('statusEdit')}
               aria-selected={activeTab === 'statusEdit'}
               aria-controls="statusEdit-panel"
