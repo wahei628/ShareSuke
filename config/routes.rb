@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'top#index'
   get 'privacy', to: 'top#privacy'
   get 'terms', to: 'top#terms'
-  resources :events, only: %i[index new create show], param: :url_slug do
+  resources :events, only: %i[new create show], param: :url_slug do
     member do
       get :url_share
       get :entry_password

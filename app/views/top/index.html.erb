@@ -38,7 +38,9 @@
           <%= image_tag "https://i.gyazo.com/db44bea4a5d4fe976a8e2863973f2c73.gif", size: "600x400", class:"mx-auto my-10 rounded-lg" %>
           <div class="text-center text-sm md:text-lg">
             <p class="mb-5">名前を登録する事でスケジュール登録ができます</p>
-            <p>各日付の参加の可否を⚪︎△◻︎で登録しましょう</p>
+            <div class="flex items-center justify-center">
+              <p>各日付の参加の可否を</p><span id="statusIcon"></span><p>で登録しましょう</p>
+            </div> 
           </div>
         </div>
         <div class="bg-white p-6 rounded-lg shadow-xl mx-3 mb-10 py-10">

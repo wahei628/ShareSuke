@@ -3,6 +3,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { CalendarForm } from './newCalendar/components/CalendarForm';
 import ScheduleTable from "./newSchedule/components/ScheduleTable";
+import { StatusIcon } from './statusIcon';
 
 document.addEventListener("turbo:load", () => {
   const CalendarRoot = document.getElementById("react-calendar-form");
@@ -25,5 +26,8 @@ document.addEventListener("turbo:load", () => {
         />
       </div>
     );
+  
   }
+  const statusIconRoot = document.getElementById("statusIcon"); 
+  statusIconRoot && createRoot(statusIconRoot).render(<StatusIcon />);
 });
