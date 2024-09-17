@@ -20,16 +20,37 @@
 
       <div class="mb-4">
         <%= f.label :password, "合言葉 ※任意", class: "block mb-1" %>
-        <%= f.password_field :password, id: 'password-field', class: "input input-bordered w-full p-2" %>
+        
+        <div class = "flex items-center my-3">
+          <%= f.password_field :password, id: 'password-field', class: "input input-bordered w-full p-2" %>
+          <button type="button" class="btn btn-xs btn-success text-white ml-2" id="password_copy_btn">コピー</button>
+          <div class="tooltip tooltip-open tooltip-right hidden mb-2" id="password_tooltip" data-tip="コピーしました！"></div>
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-circle btn-ghost text-info">
+              <svg
+                tabindex="0"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                class="h-4 w-4 stroke-current">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div
+              tabindex="0"
+              class="card compact dropdown-content bg-base-100 rounded-box z-[1] w-64 shadow">
+              <div tabindex="0" class="card-body">
+                <h2 class="card-title">合言葉はアクセス時に必要になります</h2>
+                <p> コピーボタンを押してクリップボードにコピーしておきましょう </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="flex items-center my-3">
-        <h1 class="mr-2">パスワード設定値:</h1>
-        <p id="password" class="font-bold px-2"></p>
-        <button type="button" class="btn btn-xs btn-success text-white ml-2" id="password_copy_btn">コピー</button>
-        <div class="tooltip tooltip-open tooltip-right hidden mb-2" id="password_tooltip" data-tip="コピーしました！"></div>
-      </div>
-
       <div class="mt-6 text-center">
         <%= f.submit "イベントページを作成する", class: "btn bg-[#FC7400] hover:bg-[#FF9500] text-white shadow-xl cursor-pointer" %>
       </div>
