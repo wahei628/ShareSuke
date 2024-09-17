@@ -3,7 +3,9 @@
     <h1 class="card-title text-center text-2xl mb-6">イベント新規作成</h1>
     <%= form_with model: @event, url: events_path, local: true do |f| %>
       <div class="mb-4">
-        <%= f.label :title, "タイトル", class: "block mb-1" %>
+        <label class="block mb-1 flex items-center">タイトル
+          <i class="fa-solid fa-asterisk tooltip-icon ml-2 text-[#FF5974]"></i>
+        </label>
         <%= f.text_field :title, class: "input input-bordered w-full p-2" %>
       </div>
 

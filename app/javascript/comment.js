@@ -6,10 +6,20 @@ document.addEventListener('turbo:load', function() {
       var userName = this.dataset.userName;
       document.getElementById('user_id_field').value = userId;
 
-      // Show tooltip with user name
-      var tooltip = document.getElementById('user_selected_tooltip');
-      tooltip.textContent = userName + 'を選択中';
-      tooltip.classList.remove('hidden');
+      document.querySelectorAll('.arrow-icon').forEach(function(arrow) {
+        arrow.remove();
+      });
+
+      var arrow = document.createElement('i');
+      arrow.classList.add('fa-solid', 'fa-caret-down', 'arrow-icon', 'absolute');
+
+      var parent = this.parentNode;
+      parent.appendChild(arrow);
+
+      arrow.style.color = '#5B5B5B';
+      arrow.style.top = '-18px';
+      parent.style.display = 'grid';
+      parent.style.placeItems = 'center';
     });
   });
 
@@ -30,10 +40,9 @@ document.addEventListener('turbo:load', function() {
         }
       });
     } else {
-      // Hide tooltip after comment is submitted
-      var tooltip = document.getElementById('user_selected_tooltip');
-      tooltip.textContent = userName + 'を選択中';
-      tooltip.classList.remove('hidden');
+      setTimeout(function() {
+        event.target.reset();
+      }, 100);
     }
   });
 });
