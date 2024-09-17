@@ -1,3 +1,64 @@
-<div class="flex justify-center items-center h-screen">
-  <%= link_to 'イベント作成', new_event_path, class: "btn btn-lg text-3xl px-8 bg-[#FC7400] hover:bg-[#FF9500] text-white shadow-xl" %>
+<div class="min-h-screen flex flex-col justify-center items-center">
+  <div class="container mx-auto px-10">
+    <header class="text-center my-10">
+      <p class="text-lg md:text-xl text-center mt-5">みんなで予定を合わせたいけど...</p>
+      <p class="text-lg md:text-xl text-center mt-5">名前やメールアドレスの入力など会員登録が面倒...</p>
+      <%= image_tag "Sharesuke_logo.png", size: "800x800", class: "mx-auto" %>
+      <%= link_to 'イベント作成', new_event_path, class: "btn btn-lg text-1xl px-8 bg-[#FC7400] hover:bg-[#FF9500] text-white shadow-xl" %>
+      <p class="text-lg md:text-xl text-center mt-24">そんな時に会員登録なしでスケジュール調整ができてしまいます！ そう..Sharesukeならね</p>
+      <p class="my-5 text-lg">ShareSuke SHARPENS YOUR SCHEDULES UP</p>
+    </header>
+    <div class="px-4 pt-20">
+    </div>
+    <hr class="my-24 border-t-2 border-black">
+    <section>
+      <div class="grid grid-cols-1 gap-4">
+        <h2 class="text-2xl md:text-3xl mb-16 text-center">《 Sharesukeの使い方 》</h2>
+        <div class="bg-white p-6 rounded-lg shadow-xl mx-3 mb-10 py-10 ">
+          <h1 class="text-xl md:text-2xl text-center"> 【スケジュールを作成しよう！】 </h1>
+          <%= image_tag "https://i.gyazo.com/833ed7bc74a12f6400bfc1b474f0c165.gif", size: "600x400", class:"mx-auto my-10 rounded-lg" %>
+          <div class="text-center text-sm md:text-lg">
+            <p class="mb-5">まずは、イベント作成ページからイベントを作成しましょう</p>
+            <p> タイトルや内容を入力し、イベントの日にちを選択してください </p>
+            <p> イベントの閲覧にパスワードを設定できるので、コピーしてあげると便利です！ </p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl mx-3 mb-10 py-10">
+          <h1 class="text-xl md:text-2xl text-center">【 URLを共有しよう 】</h1>
+          <%= image_tag "https://i.gyazo.com/6b0adbbf2374e29d03567a328435c43a.gif", size: "600x400", class:"mx-auto my-10 rounded-lg" %>
+
+          <div class="text-center text-sm md:text-lg">
+            <p class="mb-5">イベント作成後、詳細が表示されるのでURLクリックで調整ページに遷移できます</p>
+            <p>調整ページでは、スケジュール調整ができるのでURLをコピーして友達に共有してあげましょう</p>
+            <p class = "text-bold">※ イベントにパスワードが設定されている場合は、パスワード認証が必要です</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl mx-3 mb-10 py-10">
+          <h1 class="text-xl md:text-2xl text-center">【 スケジュールを登録しよう 】</h1>
+          <%= image_tag "https://i.gyazo.com/db44bea4a5d4fe976a8e2863973f2c73.gif", size: "600x400", class:"mx-auto my-10 rounded-lg" %>
+          <div class="text-center text-sm md:text-lg">
+            <p class="mb-5">名前を登録する事でスケジュール登録ができます</p>
+            <p>各日付の参加の可否を⚪︎△◻︎で登録しましょう</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl mx-3 mb-10 py-10">
+          <h1 class="text-xl md:text-2xl text-center">【 他の仲間にコメントをしよう 】</h1>
+          <%= image_tag "https://i.gyazo.com/f4628b234627710f360fa40f32eeed77.gif", size: "600x400", class:"mx-auto my-10 rounded-lg" %>
+          <div class="text-center text-sm md:text-lg">
+            <p class="mb-5">他の方にコメントを残すこともできます</p>
+            <p>自身の名前をクリック後コメント入力ができるのでうまく活用してください！</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-xl mx-3 mb-10 py-10">
+          <h1 class="text-xl md:text-2xl text-center"> さっそく使ってみる </h1>
+          <%= image_tag "Sharesuke_logo.png", size: "800x800", class: "mx-auto" %>
+          <div class="text-center text-sm md:text-lg">
+            <div class="px-4 pt-20">
+                <%= link_to 'イベント作成', new_event_path, class: "btn btn-lg text-1xl px-8 bg-[#FC7400] hover:bg-[#FF9500] text-white shadow-xl" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 </div>
