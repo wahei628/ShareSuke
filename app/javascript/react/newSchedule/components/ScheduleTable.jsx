@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
-import ScheduleCell from "./ScheduleCell";
 import axios from "axios";
 import { FaRegCircle } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 import { BsTriangle } from "react-icons/bs";
+import { DisplayScheduleCell, ScheduleCell } from './ScheduleCell';
 
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const [selections, setSelections] = useState({});
+  const [activeTab, setActiveTab] = useState('statusDisplay')
   const cellStyle = `w-32 h-24`
   const cellDateStyle = `w-24 h-24`
+  const borderClass = "border-2 border-orange-400 text-bold"
+  const tabClass = "px-4 border-t-2 border-x-2 rounded-t-md font-bold focus:outline-none relative";
+  const activeTabClass = `bg-white ${borderClass} border-b-0 text-green-500 
+  after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-[2px] after:bg-white`;
+  const inactiveTabClass = "bg-gray-100 text-green-300 border-transparent hover:text-green-500";
 
   useEffect(() => {
     axios
@@ -43,6 +49,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
       },
     }));
 
+
     const statusMap = { O: 1, X: 2, "△": 3 };
     const status = statusMap[label];
 
@@ -53,9 +60,6 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
           schedule_id: scheduleId,
           status: status,
         },
-      })
-      .then((response) => {
-        console.log("Success:", response.data);
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -101,6 +105,29 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
       <div className="w-full flex justify-center"> {/* 全幅のコンテナ */}
         <div className="w-11/12"> {/* 11/12幅のコンテナ */}
           <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
+            
+          {/* タブ切り替え用のボタンを設置 */}
+          <div className="flex border-b-2  border-orange-400 mb-4">
+            <button
+              role="tab"
+              className={`${tabClass} ${activeTab === 'statusDisplay' ? activeTabClass : inactiveTabClass} cursor-pointer h-12 text-lg px-14`}
+              onClick={() => setActiveTab('statusDisplay')}
+              aria-selected={activeTab === 'statusDisplay'}
+              aria-controls="statusDisplay-panel"
+            >
+              表示
+            </button>
+            <button
+              role="tab"
+              className={`${tabClass} ${activeTab === 'statusEdit' ? activeTabClass : inactiveTabClass} cursor-pointer h-12 text-lg px-14`}
+              onClick={() => setActiveTab('statusEdit')}
+              aria-selected={activeTab === 'statusEdit'}
+              aria-controls="statusEdit-panel"
+            >
+              編集
+            </button>
+          </div>
+
           <div className="flex justify-start"> {/* フレックスコンテナ */}
             <div className="border rounded overflow-auto">
               <div className="inline-block">
@@ -126,31 +153,32 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                             className={`font-medium border border-gray-300 ${cellDateStyle} p-2 bg-gray-100`}
                           >
                             {/* 西暦を表示 */}
-                            {schedule.date.slice(0, 4)}
-                            <br />
-                            {/* 日付を表示 */}
-                            {schedule.date.slice(5)}
-                            <div className={`flex mt-1 max-w-20 ${cellDateStyle}`}>
-                              <StatusBadge
-                                icon={FaRegCircle}
-                                count={oCount}
-                                iconColor="bg-green-100 text-green-300"
-                                textColor="text-green-800"
-                                borderColor="#fff" />
-                              <StatusBadge
-                                icon={BsTriangle}
-                                count={ΔCount}
-                                iconColor="bg-yellow-100 text-yellow-500"
-                                textColor="text-yellow-800"
-                                borderColor="#fff" />
-                              <StatusBadge
-                                icon={RxCross1}
-                                count={xCount}
-                                iconColor="bg-red-100 text-red-600"
-                                textColor=" text-red-700"
-                                borderColor="#fff" />
+                            <div className="text-xs">
+                              {`${schedule.date.slice(0, 4)}`}
                             </div>
-                          </div>
+                            {/* 日付を表示 */}
+                            {schedule.date.slice(5)}                            
+                              <div className={`flex mt-1 max-w-20 ${cellDateStyle}`}>
+                                <StatusBadge
+                                  icon={FaRegCircle}
+                                  count={oCount}
+                                  iconColor="bg-green-100 text-green-300"
+                                  textColor="text-green-800"
+                                  borderColor="#fff" />
+                                <StatusBadge
+                                  icon={BsTriangle}
+                                  count={ΔCount}
+                                  iconColor="bg-yellow-100 text-yellow-500"
+                                  textColor="text-yellow-800"
+                                  borderColor="#fff" />
+                                <StatusBadge
+                                  icon={RxCross1}
+                                  count={xCount}
+                                  iconColor="bg-red-100 text-red-600"
+                                  textColor=" text-red-700"
+                                  borderColor="#fff" />
+                              </div>
+                            </div>
                         )
                       );
                     })}
@@ -162,7 +190,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                     <div className="bg-gray-100 text-center border border-gray-300 p-2 whitespace-normal sticky top-0 z-10">
                       <a
                         href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
-                        className="text-blue-600 hover:text-blue-800 h-20"
+                        className="text-blue-600 hover:text-blue-800 h-20 truncate w-[50px]"
                       >
                         {user.name}
                       </a>
@@ -172,7 +200,6 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                       const userId = user.id;
                       const selectedLabel = selections[scheduleId]?.[userId] || "";
 
-
                       return (
                         schedule.date && (
                           <div
@@ -180,13 +207,21 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                             className={`text-center border border-gray-300 p-2 ${cellStyle} flex justify-center items-center`}
                           >
                             <div className="flex justify-center items-center space-x-1">
-                              {["O", "△", "X"].map((label) => (
-                                <ScheduleCell
-                                  key={label}
-                                  label={label}
-                                  isSelected={selectedLabel === label}
-                                  onClick={() => handleCellClick(userId, scheduleId, label)} />
-                              ))}
+                              {activeTab === 'statusEdit' ? (
+                                ["O", "△", "X"].map((label) => (
+                                  <ScheduleCell
+                                    key={label}
+                                    label={label}
+                                    isSelected={selectedLabel === label}
+                                    onClick={() => handleCellClick(userId, scheduleId, label)}
+                                  />
+                                ))
+                              ) : (
+                                <DisplayScheduleCell
+                                  label={selectedLabel}
+                                  isSelected={true}
+                                />
+                              )}
                             </div>
                           </div>
                         )
