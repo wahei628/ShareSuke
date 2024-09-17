@@ -110,7 +110,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
           <div className="flex border-b-2  border-orange-400 mb-4">
             <button
               role="tab"
-              className={`${tabClass} ${activeTab === 'statusDisplay' ? activeTabClass : inactiveTabClass} cursor-pointer h-12 text-lg px-14`}
+              className={`${tabClass} ${activeTab === 'statusDisplay' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg px-10`}
               onClick={() => setActiveTab('statusDisplay')}
               aria-selected={activeTab === 'statusDisplay'}
               aria-controls="statusDisplay-panel"
@@ -119,7 +119,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
             </button>
             <button
               role="tab"
-              className={`${tabClass} ${activeTab === 'statusEdit' ? activeTabClass : inactiveTabClass} cursor-pointer h-12 text-lg px-14`}
+              className={`${tabClass} ${activeTab === 'statusEdit' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg px-10`}
               onClick={() => setActiveTab('statusEdit')}
               aria-selected={activeTab === 'statusEdit'}
               aria-controls="statusEdit-panel"
