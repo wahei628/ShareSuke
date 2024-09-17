@@ -1,9 +1,9 @@
 class EventsController < ApplicationController
   before_action :set_event, except: %i[index create new]
-  def index
-    @events = Event.all
-    @comments = Comment.all # 全てのコメントを取得
-  end
+  # def index
+  #   @events = Event.all
+  #   @comments = Comment.all # 全てのコメントを取得
+  # end
 
   def show
     if @event.password_hash.blank? || session[:event_access] == @event.id
@@ -21,7 +21,7 @@ class EventsController < ApplicationController
     @event = Event.new
     @event.schedules.new
   end
-  
+
   def create
     @event = Event.new(event_params.except(:dates))
     @event.password=(params[:password]) if params[:password].present?
