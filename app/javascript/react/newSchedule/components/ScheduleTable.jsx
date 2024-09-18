@@ -102,7 +102,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   );
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="flex justify-center">
       <div className="w-11/12">
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
 
@@ -127,15 +127,15 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         編集
       </button>
     </div>
-    <div className="w-full max-w-screen-xl mx-auto">
+    <div className="max-w-screen-xl mx-auto">
       <div className="border border-gray-300 rounded overflow-hidden">
         <div className="relative overflow-auto" style={{ maxHeight: '600px', maxWidth: '100%' }}>
-          <table className="w-full border-collapse table-fixed">
+          <table className="border-collapse table-fixed">
             <thead>
               <tr>
                 {/* 左上のセル（固定） */}
                 <th className="sticky top-0 left-0 z-50 bg-gray-300 text-white p-2 border border-gray-300 w-24 shadow-md">
-                  <div className="relative z-20"></div>
+                  <div className="relative z-20 h-4"></div>
                 </th>
 
                 {/* 1行目の他のヘッダー（上部に固定） */}
