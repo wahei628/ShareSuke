@@ -3,5 +3,5 @@
     <%= comment.user.name %>
     <time class="text-xs opacity-50"> <%= comment.created_at.strftime('%-m/%-d %H:%M') %> </time>
   </div>
-  <div class="chat-bubble"> <%= comment.body %> </div>
+  <div class="chat-bubble whitespace-pre-wrap"><%= comment.body %></div>
 </div>
