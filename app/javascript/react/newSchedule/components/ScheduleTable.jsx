@@ -127,7 +127,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         編集
       </button>
     </div>
-    <div className="max-w-screen-xl border border-green-400 rounded">
+    <div className="border border-green-400 rounded">
       <div className="flex justify-start">
         <div className="border border-transparent rounded overflow-hidden flex justify-start">
           <div className="relative overflow-auto" style={{ maxHeight: '600px', maxWidth: '100%' }}>
