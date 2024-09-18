@@ -1,7 +1,14 @@
 import consumer from "./consumer"
 
 document.addEventListener('DOMContentLoaded', () => {
-  const eventId = document.getElementById('comments').dataset.eventId;
+  const comments = document.getElementById('comments')
+
+  if (comments) {
+    comments.scrollTop = comments.scrollHeight;
+  }
+
+  const eventId = comments.dataset.eventId;
+
   consumer.subscriptions.create({ channel: "CommentChannel", event_id: eventId }, {
     connected() {
     },
@@ -14,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (data.comment) {
         const html = data.comment;
         comments.insertAdjacentHTML('beforeend', html);
+        comments.scrollTop = comments.scrollHeight;
       }
 
       if (data.notice || data.alert || data.danger) {
