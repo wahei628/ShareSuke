@@ -127,105 +127,107 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         編集
       </button>
     </div>
-    <div className="max-w-screen-xl mx-auto">
-      <div className="border border-green-400 rounded overflow-hidden">
-        <div className="relative overflow-auto" style={{ maxHeight: '600px', maxWidth: '100%' }}>
-          <table className="border-collapse table-fixed">
-            <thead>
-              <tr>
-                {/* 左上のセル（固定） */}
-                <th className="sticky top-0 left-0 z-50 bg-gray-300 text-white p-2 border border-gray-300 w-24 shadow-md">
-                  <div className="relative z-20 h-4"></div>
-                </th>
+    <div className="max-w-screen-xl">
+      <div className="flex justify-start">
+        <div className="border border-green-400 rounded overflow-hidden flex justify-start">
+          <div className="relative overflow-auto" style={{ maxHeight: '600px', maxWidth: '100%' }}>
+            <table className="border-collapse table-fixed">
+              <thead>
+                <tr>
+                  {/* 左上のセル（固定） */}
+                  <th className="sticky top-0 left-0 z-50 bg-gray-300 text-white p-2 border border-gray-300 w-24 shadow-md">
+                    <div className="relative z-20 h-4"></div>
+                  </th>
 
-                {/* 1行目の他のヘッダー（上部に固定） */}
-                {users.map((user) => (
-                    <th key={user.id} className={`${cellStyle} sticky top-0 z-40 bg-gray-100 text-center border border-gray-300 text-cyan-600 px-2 whitespace-normal`}>
-                      <a
-                        href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
-                        className="relative z-20"
-                      >
-                        {user.name}
-                      </a>
-                    </th>
-                  ))}
-              </tr>
-            </thead>
-            <tbody>
-              {/* 1行目 */}
-                {schedules.map((schedule) => {
-                  const scheduleId = schedule.id;
-                  const oCount = countLabels(scheduleId, "O");
-                  const ΔCount = countLabels(scheduleId, "△");
-                  const xCount = countLabels(scheduleId, "X");
+                  {/* 1行目の他のヘッダー（上部に固定） */}
+                  {users.map((user) => (
+                      <th key={user.id} className={`${cellStyle} sticky top-0 z-40 bg-gray-100 text-center border border-gray-300 text-cyan-600 px-2 whitespace-normal`}>
+                        <a
+                          href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
+                          className="relative z-20"
+                        >
+                          {user.name}
+                        </a>
+                      </th>
+                    ))}
+                </tr>
+              </thead>
+              <tbody>
+                {/* 1行目 */}
+                  {schedules.map((schedule) => {
+                    const scheduleId = schedule.id;
+                    const oCount = countLabels(scheduleId, "O");
+                    const ΔCount = countLabels(scheduleId, "△");
+                    const xCount = countLabels(scheduleId, "X");
 
-                  return (
-                    schedule.date && (
-                      <tr key={schedule.id} className={`font-medium border border-gray-300 ${cellDateStyle} p-2`}>
-                        
-                        <td className="sticky left-0 z-30 bg-gray-100">
-                          <div className="text-xs ml-1">
-                            {`${schedule.date.slice(0, 4)}`} {/* 西暦 */}
-                          </div>
-                          <div className="text-lg ml-2">
-                            {schedule.date.slice(5)} {/* 日付 */}
-                          </div>
-                          <div className={`flex justify-center items-center ml-3`}>
-                            <StatusBadge
-                              icon={FaRegCircle}
-                              count={oCount}
-                              iconColor="bg-green-100 text-green-300"
-                              textColor="text-green-800"
-                              borderColor="#fff" />
-                            <StatusBadge
-                              icon={BsTriangle}
-                              count={ΔCount}
-                              iconColor="bg-yellow-100 text-yellow-500"
-                              textColor="text-yellow-800"
-                              borderColor="#fff" />
-                            <StatusBadge
-                              icon={RxCross1}
-                              count={xCount}
-                              iconColor="bg-red-100 text-red-600"
-                              textColor=" text-red-700"
-                              borderColor="#fff" />
-                          </div>
-                        </td>
-                        {users.map((user) => {
-                          const userId = user.id;
-                          const selectedLabel = selections[scheduleId]?.[userId] || "";
+                    return (
+                      schedule.date && (
+                        <tr key={schedule.id} className={`font-medium border border-gray-300 ${cellDateStyle} p-2`}>
+                          
+                          <td className="sticky left-0 z-30 bg-gray-100">
+                            <div className="text-xs ml-1">
+                              {`${schedule.date.slice(0, 4)}`} {/* 西暦 */}
+                            </div>
+                            <div className="text-lg ml-2">
+                              {schedule.date.slice(5)} {/* 日付 */}
+                            </div>
+                            <div className={`flex justify-center items-center ml-3`}>
+                              <StatusBadge
+                                icon={FaRegCircle}
+                                count={oCount}
+                                iconColor="bg-green-100 text-green-300"
+                                textColor="text-green-800"
+                                borderColor="#fff" />
+                              <StatusBadge
+                                icon={BsTriangle}
+                                count={ΔCount}
+                                iconColor="bg-yellow-100 text-yellow-500"
+                                textColor="text-yellow-800"
+                                borderColor="#fff" />
+                              <StatusBadge
+                                icon={RxCross1}
+                                count={xCount}
+                                iconColor="bg-red-100 text-red-600"
+                                textColor=" text-red-700"
+                                borderColor="#fff" />
+                            </div>
+                          </td>
+                          {users.map((user) => {
+                            const userId = user.id;
+                            const selectedLabel = selections[scheduleId]?.[userId] || "";
 
-                          return (
-                            <td
-                              key={`${user.id}-${schedule.id}`}
-                              className={`text-center border border-gray-300 px-2`}
-                            >
-                              <div className={`flex justify-center items-center ${cellStyle}`}>
-                                {activeTab === 'statusEdit' ? (
-                                  ["O", "△", "X"].map((label) => (
-                                    <ScheduleCell
-                                      key={label}
-                                      label={label}
-                                      isSelected={selectedLabel === label}
-                                      onClick={() => handleCellClick(userId, scheduleId, label)}
+                            return (
+                              <td
+                                key={`${user.id}-${schedule.id}`}
+                                className={`text-center border border-gray-300 px-2`}
+                              >
+                                <div className={`flex justify-center items-center ${cellStyle}`}>
+                                  {activeTab === 'statusEdit' ? (
+                                    ["O", "△", "X"].map((label) => (
+                                      <ScheduleCell
+                                        key={label}
+                                        label={label}
+                                        isSelected={selectedLabel === label}
+                                        onClick={() => handleCellClick(userId, scheduleId, label)}
+                                      />
+                                    ))
+                                  ) : (
+                                    <DisplayScheduleCell
+                                      label={selectedLabel}
+                                      isSelected={true}
                                     />
-                                  ))
-                                ) : (
-                                  <DisplayScheduleCell
-                                    label={selectedLabel}
-                                    isSelected={true}
-                                  />
-                                )}
-                              </div>
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    )
-                  );
-                })}
-              </tbody>
-            </table>
+                                  )}
+                                </div>
+                              </td>
+                            );
+                          })}
+                        </tr>
+                      )
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
