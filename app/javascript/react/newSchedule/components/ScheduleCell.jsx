@@ -1,7 +1,35 @@
 import React from 'react';
-import { RxCross1 } from 'react-icons/rx';
-import { BsTriangle } from "react-icons/bs";
-import { RiCircleLine } from "react-icons/ri";
+
+const CircleIcon = ({ color }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+    <circle cx="12" cy="12" r="6" />
+  </svg>
+);
+
+const TriangleIcon = ({ color }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+    <path d="M12 7L17.5 17H6.5L12 7Z" />
+  </svg>
+);
+
+const CrossIcon = ({ color }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2">
+    <path d="M16 8L8 16M8 8L16 16" />
+  </svg>
+);
+
+const CustomIcon = ({ type, color }) => {
+  switch (type) {
+    case 'O':
+      return <CircleIcon color={color} />;
+    case '△':
+      return <TriangleIcon color={color} />;
+    case 'X':
+      return <CrossIcon color={color} />;
+    default:
+      return null;
+  }
+};
 
 export const ScheduleCell = ({ label, isSelected, onClick }) => {
   const baseClasses = "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium cursor-pointer transition-colors duration-200";
@@ -11,24 +39,17 @@ export const ScheduleCell = ({ label, isSelected, onClick }) => {
     "△": isSelected ? "bg-yellow-400 text-yellow-700 border border-yellow-500" : "text-yellow-500 border border-yellow-300 hover:bg-yellow-200",
     "X": isSelected ? "bg-red-500 text-white border border-red-700" : "text-red-600 border border-red-200 hover:bg-red-200",
   };
-  
 
-  const getIcon = () => {
-    const iconStyle = {
-      filter: 'url(#bold)',    // SVGフィルターを適用
-      strokeWidth: '1',        // アイコンの線を太くする
-      stroke: 'currentColor',  // 線の色を現在の文字色に合わせる
-    };
-
+  const getIconColor = () => {
     switch (label) {
       case 'O':
-        return <RiCircleLine style={iconStyle}/>
+        return isSelected ? 'white' : '#22c55e';  // text-green-500
       case '△':
-        return <BsTriangle style={iconStyle}  />;
+        return isSelected ? '#a16207' : '#eab308';  // text-yellow-700 : text-yellow-500
       case 'X':
-        return <RxCross1 style={iconStyle} />;
+        return isSelected ? 'white' : '#dc2626';  // text-red-600
       default:
-        return null;
+        return 'currentColor';
     }
   };
 
@@ -37,44 +58,38 @@ export const ScheduleCell = ({ label, isSelected, onClick }) => {
       onClick={onClick}
       className={`${baseClasses} ${colorClasses[label]} m-0.5`}
     >
-        {getIcon()}
+      <CustomIcon type={label} color={getIconColor()} />
     </div>
   );
 };
 
 export const DisplayScheduleCell = ({ label, isSelected }) => {
-  if (!isSelected) return null;
-
-  const baseClasses = "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors duration-200";
+  const baseClasses = "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium";
   
   const colorClasses = {
     "O": "bg-green-400 text-white border border-green-700",
     "△": "bg-yellow-400 text-yellow-700 border border-yellow-500",
-    "X": "bg-red-500 text-white border border-red-700"
+    "X": "bg-red-500 text-white border border-red-700",
   };
 
-  const getIcon = () => {
-    const iconStyle = {
-      filter: 'url(#bold)',
-      strokeWidth: '1',
-      stroke: 'currentColor',
-    };
-
+  const getIconColor = () => {
     switch (label) {
-      case "O":
-        return <RiCircleLine style={iconStyle} />;
+      case 'O':
+        return 'white';
       case '△':
-        return <BsTriangle style={iconStyle} />;
+        return '#a16207';  // text-yellow-700
       case 'X':
-        return <RxCross1 style={iconStyle} />;
+        return 'white';
       default:
-        return null;
+        return 'currentColor';
     }
   };
 
   return (
-    <div className={`${baseClasses} ${colorClasses[label]}`}>
-      {getIcon()}
+    <div className={`${baseClasses} ${colorClasses[label] || ''}`}>
+      {label && <CustomIcon type={label} color={getIconColor()} />}
     </div>
   );
 };
+
+export default CustomIcon;
