@@ -1,19 +1,29 @@
-document.addEventListener('turbo:load', function() {
-  document.querySelectorAll('.select-user').forEach(function(element) {
-    element.addEventListener('click', function(event) {
+document.addEventListener('turbo:load', () => {
+  document.querySelectorAll('.select-user').forEach((element) => {
+    element.addEventListener('click', (event) => {
       event.preventDefault();
-      var userId = this.dataset.userId;
-      var userName = this.dataset.userName;
+      var userId = event.currentTarget.dataset.userId;
+      var userName = event.currentTarget.dataset.userName;
       document.getElementById('user_id_field').value = userId;
 
-      // Show tooltip with user name
-      var tooltip = document.getElementById('user_selected_tooltip');
-      tooltip.textContent = userName + 'を選択中';
-      tooltip.classList.remove('hidden');
+      document.querySelectorAll('.arrow-icon').forEach((arrow) => {
+        arrow.remove();
+      });
+
+      var arrow = document.createElement('i');
+      arrow.classList.add('fa-solid', 'fa-caret-down', 'arrow-icon', 'absolute');
+
+      var parent = event.currentTarget.parentNode;
+      parent.appendChild(arrow);
+
+      arrow.style.color = '#5B5B5B';
+      arrow.style.top = '-18px';
+      parent.style.display = 'grid';
+      parent.style.placeItems = 'center';
     });
   });
 
-  document.getElementById('comment_form').addEventListener('submit', function(event) {
+  document.getElementById('comment_form').addEventListener('submit', (event) => {
     var userId = document.getElementById('user_id_field').value;
     if (!userId) {
       event.preventDefault();
@@ -30,10 +40,9 @@ document.addEventListener('turbo:load', function() {
         }
       });
     } else {
-      // Hide tooltip after comment is submitted
-      var tooltip = document.getElementById('user_selected_tooltip');
-      tooltip.textContent = userName + 'を選択中';
-      tooltip.classList.remove('hidden');
+      setTimeout(() => {
+        event.target.reset();
+      }, 100);
     }
   });
 });
