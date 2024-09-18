@@ -21,11 +21,14 @@ const CrossIcon = ({ color }) => (
 const CustomIcon = ({ type, color }) => {
   switch (type) {
     case 'O':
-      return <CircleIcon color={color} />;
+      // return <CircleIcon color={color} />;
+      return (<div className="text-lg">○</div>)
     case '△':
-      return <TriangleIcon color={color} />;
+      // return <TriangleIcon color={color} />;
+      return (<div className="text-xl">△</div>)
     case 'X':
-      return <CrossIcon color={color} />;
+      // return <CrossIcon color={color} />;
+      return (<div className="text-lg">✗</div>)
     default:
       return null;
   }
