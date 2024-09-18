@@ -1,23 +1,20 @@
-<div class="pt-10">
-  <%= render 'events/schedule_table' %>
-</div>
+<%= render 'events/event_details' %>
 
 <div>
   <div class="mx-auto px-4 py-8 w-11/12 border pb-10">
-    <h2 class="text-2xl mb-4" >ユーザー編集</h2>
+    <h2 class="text-2xl" >ユーザー編集</h2><br>
     <%= form_with(model: [@event, @user], local: true) do |form| %>
-      <div class="mx-1 mb-4">
+      <div class="mx-1">
         <%= form.label :name, "名前" %>
         <%= form.text_field :name, class: "text-black border border-gray-300 rounded" %>
-      </div>
+      </div><br>
       <div class="mx-1 mb-4">
-        <%= form.submit "更新する", class: "bg-[#5353DA] hover:bg-[#4141B5] text-white font-bold py-1 px-2 rounded-lg mt-2 cursor-pointer" %>
+        <%= form.submit "更新", class: "bg-[#5353DA] hover:bg-[#4141B5] text-white font-bold py-1 px-2 rounded-lg cursor-pointer" %>
       </div>
     <% end %>
-
     <%= form_with(url: event_user_path(@event, @user), method: :delete, local: true) do |form| %>
-      <div class="mx-1 mb-4">
-        <%= form.submit "削除する", class: "bg-[#FF0000] hover:bg-[#CC0000] text-white font-bold py-1 px-2 rounded-lg mt-2 cursor-pointer" %>
+      <div class="mx-1">
+        <%= form.submit "削除", class: "bg-[#FF0000] hover:bg-[#CC0000] text-white font-bold py-1 px-2 rounded-lg cursor-pointer" %>
       </div>
     <% end %>
   </div>
