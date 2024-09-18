@@ -1,17 +1,17 @@
 <div class="ml-10">
   <div class="px-5 pt-10">
-    <h2 class="text-3xl font-bold text-gray-800 mb-6"><%= @event.title %></h2>
+    <h2 class="text-3xl font-bold text-gray-800"><%= @event.title %></h2><br>
     <p class="text-lg text-gray-800"><%= @event.description %></p>
   </div>
 </div>
 
-<div class="pt-10">
+<div class="pt-7">
   <%= render 'events/schedule_table' %>
 </div>
 
 <div>
   <div class="mx-auto px-4 py-8 w-11/12 border pb-10">
-    <h2 class="text-2xl mb-4" >ユーザー登録</h2>
+    <h2 class="text-2xl" >ユーザー登録</h2><br>
     <%= form_with(model: @user, url: event_users_path(@event), local: true) do |form| %>
       <%= hidden_field_tag :event_url_slug, @event.url_slug %>
       <div class="flex items-center">

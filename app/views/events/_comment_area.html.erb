@@ -1,5 +1,6 @@
 <div class = "my-5">
   <h3 class = "text-2xl">コメント</h3>
+  <br>
   <div id="comments" data-event-id="<%= @event.id %>" class="border overflow-auto h-[calc(45vh-2rem)]">
     <% @comments.each do |comment| %>
       <%= render partial: 'comments/comment', locals: { comment: comment } %>
