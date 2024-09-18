@@ -9,7 +9,7 @@ import { StatusBadges } from "./StatusB";
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const [selections, setSelections] = useState({});
   const [activeTab, setActiveTab] = useState('statusDisplay')
-  const cellStyle = `w-32 h-4`
+  const cellStyle = `w-28 h-4`
   const cellDateStyle = `w-20`
   const borderClass = "border-2 border-orange-400 text-bold"
   const tabClass = "px-10 border-t-2 border-x-2 rounded-t-md font-bold focus:outline-none relative";
@@ -107,7 +107,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         <h2 className="text-2xl font-bold mb-6 text-gray-800">Schedules</h2>
 
 
-    <div className="flex border-b-2 border-orange-400 mb-4">
+    <div className="flex border-b-2 border-orange-400 mb-2">
       <button
         role="tab"
         className={`${tabClass} ${activeTab === 'statusDisplay' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg`}
@@ -128,7 +128,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
       </button>
     </div>
     <div className="max-w-screen-xl mx-auto">
-      <div className="border border-gray-300 rounded overflow-hidden">
+      <div className="border border-green-400 rounded overflow-hidden">
         <div className="relative overflow-auto" style={{ maxHeight: '600px', maxWidth: '100%' }}>
           <table className="border-collapse table-fixed">
             <thead>
@@ -140,7 +140,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
 
                 {/* 1行目の他のヘッダー（上部に固定） */}
                 {users.map((user) => (
-                    <th key={user.id} className={`${cellStyle} sticky top-0 z-40 bg-gray-100 text-center border border-gray-300 text-cyan-600 p-2 whitespace-normal`}>
+                    <th key={user.id} className={`${cellStyle} sticky top-0 z-40 bg-gray-100 text-center border border-gray-300 text-cyan-600 px-2 whitespace-normal`}>
                       <a
                         href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
                         className="relative z-20"
@@ -162,6 +162,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                   return (
                     schedule.date && (
                       <tr key={schedule.id} className={`font-medium border border-gray-300 ${cellDateStyle} p-2`}>
+                        
                         <td className="sticky left-0 z-30 bg-gray-100">
                           <div className="text-xs ml-1">
                             {`${schedule.date.slice(0, 4)}`} {/* 西暦 */}
@@ -197,9 +198,9 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                           return (
                             <td
                               key={`${user.id}-${schedule.id}`}
-                              className={`text-center border border-gray-300 p-2 ${cellStyle}`}
+                              className={`text-center border border-gray-300 px-2`}
                             >
-                              <div className="flex justify-center items-center h-full">
+                              <div className={`flex justify-center items-center ${cellStyle}`}>
                                 {activeTab === 'statusEdit' ? (
                                   ["O", "△", "X"].map((label) => (
                                     <ScheduleCell
