@@ -1,7 +1,14 @@
 <div class="ml-10">
   <div class="px-5 pt-10">
     <h2 class="text-3xl font-bold text-gray-800"><%= @event.title %></h2><br>
-    <p class="text-lg text-gray-800"><%= @event.description %></p>
+    <p class="text-lg text-gray-800"><%= @event.description %></p><br>
+    <div class="flex items-center">
+      <h3 class="overflow-hidden">
+        <span id="url">https://sharesuke.onrender.com/events/<%= @event.url_slug %></span>
+      </h3>
+      <button class="btn btn-xs btn-success text-white flex-grow-0 flex-shrink-0 ml-2" id="url_copy_btn">コピー</button>
+      <div class="tooltip tooltip-open tooltip-right hidden mb-2" id="url_done" data-tip="コピーしました！"></div>
+    </div>
   </div>
 </div>
 
