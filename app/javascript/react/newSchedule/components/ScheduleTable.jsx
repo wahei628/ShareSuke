@@ -9,8 +9,8 @@ import { StatusBadges } from "./StatusB";
 const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
   const [selections, setSelections] = useState({});
   const [activeTab, setActiveTab] = useState('statusDisplay')
-  const cellStyle = `w-32 h-24`
-  const cellDateStyle = `w-24 h-24`
+  const cellStyle = `w-32 h-4`
+  const cellDateStyle = `w-24`
   const borderClass = "border-2 border-orange-400 text-bold"
   const tabClass = "px-10 border-t-2 border-x-2 rounded-t-md font-bold focus:outline-none relative";
   const activeTabClass = `bg-white ${borderClass} border-b-0 text-green-500 
@@ -115,25 +115,25 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
 
 
       <div className="flex border-b-2 border-orange-400 mb-4">
-            <button
-              role="tab"
-              className={`${tabClass} ${activeTab === 'statusDisplay' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg`}
-              onClick={() => setActiveTab('statusDisplay')}
-              aria-selected={activeTab === 'statusDisplay'}
-              aria-controls="statusDisplay-panel"
-            >
-              表示
-            </button>
-            <button
-              role="tab"
-              className={`${tabClass} ${activeTab === 'statusEdit' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg`}
-              onClick={() => setActiveTab('statusEdit')}
-              aria-selected={activeTab === 'statusEdit'}
-              aria-controls="statusEdit-panel"
-            >
-              編集
-            </button>
-          </div>
+        <button
+          role="tab"
+          className={`${tabClass} ${activeTab === 'statusDisplay' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg`}
+          onClick={() => setActiveTab('statusDisplay')}
+          aria-selected={activeTab === 'statusDisplay'}
+          aria-controls="statusDisplay-panel"
+        >
+          表示
+        </button>
+        <button
+          role="tab"
+          className={`${tabClass} ${activeTab === 'statusEdit' ? activeTabClass : inactiveTabClass} cursor-default h-12 text-lg`}
+          onClick={() => setActiveTab('statusEdit')}
+          aria-selected={activeTab === 'statusEdit'}
+          aria-controls="statusEdit-panel"
+        >
+          編集
+        </button>
+      </div>
       <div className="w-full max-w-screen-xl mx-auto p-4">
         <div className="border border-gray-300 rounded overflow-hidden">
           <div className="relative overflow-auto" style={{ maxHeight: '600px', maxWidth: '100%' }}>
@@ -141,13 +141,13 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
               <thead>
                 <tr>
                   {/* 左上のセル（固定） */}
-                  <th className="sticky top-0 left-0 z-50 bg-blue-500 text-white p-2 border border-gray-300 w-24 shadow-md">
-                    <div className="relative z-20">日付</div>
+                  <th className="sticky top-0 left-0 z-50 bg-gray-300 text-white p-2 border border-gray-300 w-24 shadow-md">
+                    <div className="relative z-20"></div>
                   </th>
 
                   {/* 1行目の他のヘッダー（上部に固定） */}
                   {users.map((user) => (
-                      <th key={user.id} className={`${cellStyle} sticky top-0 z-40 bg-gray-100 text-center border border-gray-300 p-2 whitespace-normal`}>
+                      <th key={user.id} className={`${cellStyle} sticky top-0 z-40 bg-gray-100 text-center border border-gray-300 text-cyan-600 p-2 whitespace-normal`}>
                         <a
                           href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
                           className="relative z-20"
@@ -170,11 +170,13 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                       schedule.date && (
                         <tr key={schedule.id} className={`font-medium border border-gray-300 ${cellDateStyle} p-2`}>
                           <td className="sticky left-0 z-30 bg-gray-100">
-                            <div className="text-xs">
-                              {`${schedule.date.slice(0, 4)}`}
+                            <div className="text-xs ml-1">
+                              {`${schedule.date.slice(0, 4)}`} {/* 西暦 */}
                             </div>
-                            {schedule.date.slice(5)}                            
-                            <div className={`flex mt-1 max-w-20 ${cellDateStyle}`}>
+                            <div className="text-lg ml-2">
+                              {schedule.date.slice(5)} {/* 日付 */}
+                            </div>
+                            <div className={`flex justify-center items-center ml-3`}>
                               <StatusBadge
                                 icon={FaRegCircle}
                                 count={oCount}

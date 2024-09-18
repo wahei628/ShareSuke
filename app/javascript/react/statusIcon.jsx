@@ -22,7 +22,6 @@ export const StatusIcon = () => {
       <div className='text-red-400'>
         <RxCross1 style={iconStyle} />
       </div>
-
     </div>
   )
 }

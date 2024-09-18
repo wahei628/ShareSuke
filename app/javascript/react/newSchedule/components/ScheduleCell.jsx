@@ -22,7 +22,7 @@ export const ScheduleCell = ({ label, isSelected, onClick }) => {
 
     switch (label) {
       case 'O':
-        return <RiCircleLine style={iconStyle} />;
+        return <RiCircleLine style={iconStyle}/>
       case '△':
         return <BsTriangle style={iconStyle}  />;
       case 'X':
@@ -35,9 +35,9 @@ export const ScheduleCell = ({ label, isSelected, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className={`${baseClasses} ${colorClasses[label]}`}
+      className={`${baseClasses} ${colorClasses[label]} m-0.5`}
     >
-      {getIcon()}
+        {getIcon()}
     </div>
   );
 };
