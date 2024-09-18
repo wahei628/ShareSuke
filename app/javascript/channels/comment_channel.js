@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const comments = document.getElementById('comments');
       if (data.comment) {
         const html = data.comment;
-        comments.insertAdjacentHTML('beforeend', html);
+        comments.insertAdjacentHTML('afterbegin', html);
       }
 
       if (data.notice || data.alert || data.danger) {
