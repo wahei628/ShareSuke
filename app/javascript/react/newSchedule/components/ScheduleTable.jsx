@@ -127,9 +127,9 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
         編集
       </button>
     </div>
-    <div className="max-w-screen-xl">
+    <div className="border border-green-400 rounded">
       <div className="flex justify-start">
-        <div className="border border-green-400 rounded overflow-hidden flex justify-start">
+        <div className="border border-transparent rounded overflow-hidden flex justify-start">
           <div className="relative overflow-auto" style={{ maxHeight: '600px', maxWidth: '100%' }}>
             <table className="border-collapse table-fixed">
               <thead>
@@ -140,7 +140,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                   </th>
 
                   {/* 1行目の他のヘッダー（上部に固定） */}
-                  {users.map((user) => (
+                  {Array.from(users).reverse().map((user) => (
                       <th key={user.id} className={`${cellStyle} sticky top-0 z-40 bg-gray-100 text-center border border-gray-300 text-cyan-600 px-2 whitespace-normal`}>
                         <a
                           href={`/events/${eventUrlSlug}/users/${user.id}/edit`}
@@ -192,7 +192,7 @@ const ScheduleTable = ({ users, schedules, eventUrlSlug }) => {
                                 borderColor="#fff" />
                             </div>
                           </td>
-                          {users.map((user) => {
+                          {Array.from(users).reverse().map((user) => {
                             const userId = user.id;
                             const selectedLabel = selections[scheduleId]?.[userId] || "";
 
